@@ -43,10 +43,13 @@ const Header = () => {
             )
           })}
         </div>
-        <div className='flex items-center cursor-pointer gap-2 hover:bg-[#F6F6F6] transition-all ease-linear w-[120px] h-[42px] justify-center border rounded-xl'>
+        <Link
+          href='/login'
+          className='flex items-center cursor-pointer gap-2 hover:bg-[#F6F6F6] transition-all ease-linear w-[120px] h-[42px] justify-center border rounded-xl'
+        >
           <FiUser className='text-xl' />
           <span>შესვლა</span>
-        </div>
+        </Link>
       </nav>
     </header>
   )
