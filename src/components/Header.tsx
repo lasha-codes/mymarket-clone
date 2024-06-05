@@ -4,6 +4,7 @@ import { MdOutlineMailOutline } from 'react-icons/md'
 import Link from 'next/link'
 import icon from '../assets/logo.png'
 import Image from 'next/image'
+import { SignedIn, SignedOut, UserButton, UserProfile } from '@clerk/nextjs'
 
 const links = [
   { icon: MdOutlineMailOutline, href: '/inbox' },
@@ -43,13 +44,18 @@ const Header = () => {
             )
           })}
         </div>
-        <Link
-          href='/login'
-          className='flex items-center cursor-pointer gap-2 hover:bg-[#F6F6F6] transition-all ease-linear w-[120px] h-[42px] justify-center border rounded-xl'
-        >
-          <FiUser className='text-xl' />
-          <span>შესვლა</span>
-        </Link>
+        <SignedOut>
+          <Link
+            href='/login'
+            className='flex items-center cursor-pointer gap-2 hover:bg-[#F6F6F6] transition-all ease-linear w-[120px] h-[42px] justify-center border rounded-xl'
+          >
+            <FiUser className='text-xl' />
+            <span>შესვლა</span>
+          </Link>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </nav>
     </header>
   )
