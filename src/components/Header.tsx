@@ -4,7 +4,7 @@ import { MdOutlineMailOutline } from 'react-icons/md'
 import Link from 'next/link'
 import icon from '../assets/logo.png'
 import Image from 'next/image'
-import { SignedIn, SignedOut, UserButton, UserProfile } from '@clerk/nextjs'
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 const links = [
   { icon: MdOutlineMailOutline, href: '/inbox' },
@@ -32,6 +32,7 @@ const Header = () => {
           {links.map((link, idx) => {
             return (
               <Link
+                key={idx}
                 href={link.href}
                 className='p-2.5 hover:bg-[#F6F6F6] rounded-full transition-all ease-linear'
               >

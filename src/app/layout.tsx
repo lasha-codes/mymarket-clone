@@ -19,15 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <Provider>
-        <ClerkProvider
-          appearance={{
-            baseTheme: neobrutalism,
-          }}
-        >
+      <ClerkProvider
+        appearance={{
+          baseTheme: neobrutalism,
+        }}
+      >
+        <Provider>
           <body className={`${inter.className} px-7 p-5`}>{children}</body>
-        </ClerkProvider>
-      </Provider>
+        </Provider>
+      </ClerkProvider>
     </html>
   )
 }
