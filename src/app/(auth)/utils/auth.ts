@@ -14,11 +14,11 @@ export const registerAccount = async () => {
       select: { email: true },
     })
     if (userExists) return
-    console.log(userEmailAddress, user.username, user.imageUrl)
+    const username: any = user.username || userEmailAddress?.split('@')[0]
     const createdUser = await prisma.user.create({
       data: {
         email: userEmailAddress as string,
-        username: user.username as string,
+        username,
         photo: user.imageUrl,
       },
     })
