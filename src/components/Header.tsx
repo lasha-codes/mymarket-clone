@@ -24,10 +24,13 @@ const Header = () => {
         />
       </Link>
       <nav className='flex items-center gap-8'>
-        <div className='bg-[#FFF4CC] flex hover:bg-[#FFEFB2] cursor-pointer transition-all ease-linear items-center h-[42px] w-[130px] justify-center rounded-xl gap-2'>
+        <Link
+          href='/sell-item'
+          className='bg-[#FFF4CC] flex hover:bg-[#FFEFB2] cursor-pointer transition-all ease-linear items-center h-[42px] w-[130px] justify-center rounded-xl gap-2'
+        >
           <FiPlusCircle className='text-mainYellow text-[20px]' />
           <span className='text-sm'>დამატება</span>
-        </div>
+        </Link>
         <div className='flex items-center gap-3'>
           {links.map((link, idx) => {
             return (
