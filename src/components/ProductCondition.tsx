@@ -5,9 +5,15 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const ProductCondition = () => {
   const dispatch = useDispatch()
-  const { selectedConditionIndex } = useSelector((state: any) => state.product)
+  const { selectedConditionIndex, selectedCategory } = useSelector(
+    (state: any) => state.product
+  )
   return (
-    <div className='flex flex-col items-start w-full gap-3 mt-4'>
+    <div
+      className={`flex flex-col items-start w-full gap-3 mt-4 ${
+        selectedCategory ? 'flex' : 'hidden'
+      }`}
+    >
       <h4 className='text-[14px] font-medium'>ნივთის მდგომარეობა</h4>
       <div className='flex flex-start gap-2'>
         {productConditions.map((condition: string, idx: number) => {
