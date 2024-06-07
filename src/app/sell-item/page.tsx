@@ -1,4 +1,22 @@
+import CategorySelector from '@/components/CategorySelector'
 import { IoIosArrowDown } from 'react-icons/io'
+
+export const productTypes = [
+  'სახლი და ბაღი',
+  'საოჯახო ტექნიკა',
+  'ტექნიკა',
+  'ნადირობა და თევზაობა',
+  'მუსიკა',
+  'საბავშვო',
+  'სილამაზე და მოდა',
+  'მშენებლობა და რემონტი',
+  'სოფლის მეურნეობა',
+  'ცხოველები',
+  'სპორტი და დასვენება',
+  'ბიზნესი და დანადგარები',
+  'წიგნები და კანცელარია',
+  'ხელოვნება და საკოლექციო',
+]
 
 const SellItemPage = () => {
   const statementTypes = ['გაყიდვა', 'შეძენა', 'გაქირავება', 'მომსახურება']
@@ -26,15 +44,20 @@ const SellItemPage = () => {
                 })}
               </div>
             </div>
-            <div className='flex flex-col items-start gap-3 w-full cursor-pointer'>
+            <div className='flex flex-col items-start gap-3 w-full relative'>
               <h4 className='text-[14px] font-medium'>
                 აირჩიე/ჩაწერე კატეგორია{' '}
                 <span className='text-sm text-red-500'>*</span>
               </h4>
-              <div className='w-full py-4 px-4 text-[14px] text-gray-400 rounded-xl border flex items-center justify-between'>
+              <div className='w-full py-4 px-4 relative text-[14px] cursor-pointer text-gray-400 rounded-xl border flex items-center justify-between'>
+                <input
+                  type='text'
+                  className='absolute w-full cursor-pointer z-[1] h-full bg-transparent outline-none'
+                />
                 <span>აირჩიე/ჩაწერე კატეგორია</span>
-                <IoIosArrowDown />
+                <IoIosArrowDown className='z-[10]' />
               </div>
+              <CategorySelector />
             </div>
           </div>
         </div>
