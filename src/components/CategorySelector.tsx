@@ -65,7 +65,7 @@ text-gray-400 rounded-xl border transition-all duration-200 ease-linear ${
         </div>
       </div>
       <div
-        className={`absolute flex flex-col w-full h-[300px] overflow-y-scroll 
+        className={`absolute z-[100] flex flex-col w-full h-[300px] overflow-y-scroll 
       top-[100px] border py-4 text-[15.5px] left-1/2 items-start transition-all duration-300 ease-out -translate-x-1/2 bg-white rounded-xl ${
         selectorOpened
           ? 'opacity-100 pointer-events-auto'

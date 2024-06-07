@@ -25,7 +25,9 @@ export default function RootLayout({
         }}
       >
         <Provider>
-          <body className={`${inter.className}`}>{children}</body>
+          <body className={`${inter.className} overflow-x-hidden`}>
+            {children}
+          </body>
         </Provider>
       </ClerkProvider>
     </html>

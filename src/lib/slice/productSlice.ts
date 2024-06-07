@@ -32,6 +32,7 @@ const productSlice = createSlice({
     },
     deleteSelectedCategory: (state) => {
       state.selectedCategory = null
+      state.selectedConditionIndex = 0
     },
     selectConditionIndex: (state, { payload }) => {
       const { index } = payload
