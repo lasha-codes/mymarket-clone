@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+type initialStateType = {
+  selectorOpened: boolean
+  selectedTypeIndex: number
+}
+
+const initialState: initialStateType = {
   selectorOpened: false,
+  selectedTypeIndex: 0,
 }
 
 const productSlice = createSlice({
@@ -11,9 +17,13 @@ const productSlice = createSlice({
     toggleSelector: (state) => {
       state.selectorOpened = !state.selectorOpened
     },
+    selectTypeIndex: (state, { payload }) => {
+      const { index } = payload
+      state.selectedTypeIndex = index
+    },
   },
 })
 
 export default productSlice.reducer
 
-export const { toggleSelector } = productSlice.actions
+export const { toggleSelector, selectTypeIndex } = productSlice.actions
