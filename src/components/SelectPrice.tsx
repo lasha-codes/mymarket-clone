@@ -1,7 +1,13 @@
+'use client'
+
 import { IoIosArrowDown } from 'react-icons/io'
 import { priceOptions } from '@/app/sell-item/page'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectPriceOffer } from '@/lib/slice/productSlice'
 
 const SelectPrice = () => {
+  const dispatch = useDispatch()
+  const { selectedPriceOffers } = useSelector((state: any) => state.product)
   return (
     <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
       <h3 className='text-[16px] font-semibold'>ფასი</h3>
@@ -24,7 +30,17 @@ const SelectPrice = () => {
         <div className='flex items-center justify-start gap-3 mt-3'>
           {priceOptions.map((option: string, idx: number) => {
             return (
-              <button key={idx} className='rounded-full bg-gray-100 px-5 py-2'>
+              <button
+                onClick={() =>
+                  dispatch(selectPriceOffer({ priceOffer: option }))
+                }
+                key={idx}
+                className={`rounded-full px-5 transition-all duration-200 ease-in-out py-2 ${
+                  selectedPriceOffers.includes(option)
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-gray-100 text-black'
+                }`}
+              >
                 {option}
               </button>
             )

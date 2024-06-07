@@ -5,6 +5,7 @@ type initialStateType = {
   selectedTypeIndex: number
   selectedCategory: string | null
   selectedConditionIndex: number
+  selectedPriceOffers: string[] | []
 }
 
 const initialState: initialStateType = {
@@ -12,6 +13,7 @@ const initialState: initialStateType = {
   selectedTypeIndex: 0,
   selectedCategory: null,
   selectedConditionIndex: 0,
+  selectedPriceOffers: ['ფასის შეთავაზება'],
 }
 
 const productSlice = createSlice({
@@ -38,6 +40,18 @@ const productSlice = createSlice({
       const { index } = payload
       state.selectedConditionIndex = index
     },
+    selectPriceOffer: (state: any, { payload }) => {
+      const { priceOffer } = payload
+      if (state.selectedPriceOffers.includes(priceOffer)) {
+        state.selectedPriceOffers = state.selectedPriceOffers.filter(
+          (offer: string) => {
+            return offer !== priceOffer
+          }
+        )
+      } else {
+        state.selectedPriceOffers.push(priceOffer)
+      }
+    },
   },
 })
 
@@ -49,4 +63,5 @@ export const {
   selectCategory,
   deleteSelectedCategory,
   selectConditionIndex,
+  selectPriceOffer,
 } = productSlice.actions
