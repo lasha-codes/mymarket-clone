@@ -25,6 +25,7 @@ export const productTypes = [
 export const statementTypes = ['გაყიდვა', 'შეძენა', 'გაქირავება', 'მომსახურება']
 export const productConditions = ['მეორადი', 'ახალი', 'ახალივით', 'ნაწილებად']
 export const priceOptions = ['ფასის შეთავაზება', 'ფასი შეთავაზებით']
+export const billOptions = ['ლარი', 'დოლარი']
 
 const SellItemPage = () => {
   return (

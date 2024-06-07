@@ -1,13 +1,16 @@
 'use client'
 
 import { IoIosArrowDown } from 'react-icons/io'
-import { priceOptions } from '@/app/sell-item/page'
+import { billOptions, priceOptions } from '@/app/sell-item/page'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectPriceOffer } from '@/lib/slice/productSlice'
+import { toggleBillBox } from '@/lib/slice/productSlice'
 
 const SelectPrice = () => {
   const dispatch = useDispatch()
-  const { selectedPriceOffers } = useSelector((state: any) => state.product)
+  const { selectedPriceOffers, billBoxOpen } = useSelector(
+    (state: any) => state.product
+  )
   return (
     <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
       <h3 className='text-[16px] font-semibold'>ფასი</h3>
@@ -19,12 +22,37 @@ const SelectPrice = () => {
         <div className='w-[65%] flex items-center'>
           <input
             type='number'
-            className='border h-[55px] px-5 rounded-bl-xl w-full rounded-tl-xl outline-none placeholder:text-black/85'
+            className='border h-[55px] px-5 rounded-bl-xl w-full rounded-tl-xl outline-none placeholder:text-black/50 text-black/60'
             placeholder='0'
           />
-          <div className='border border-l-0 text-gray-500 cursor-pointer text-[14px] h-[55px] flex px-5 gap-10 items-center rounded-tr-xl rounded-br-xl '>
+          <div
+            onClick={() => dispatch(toggleBillBox())}
+            className={`border relative border-l-0 text-gray-500 cursor-pointer text-[14px] h-[55px] flex px-4 gap-10 items-center rounded-tr-xl rounded-br-xl`}
+          >
             <span>ლარი</span>
-            <IoIosArrowDown />
+            <IoIosArrowDown
+              className={`transition-all duration-300 ease-in-out ${
+                billBoxOpen && 'rotate-180'
+              }`}
+            />
+            <div
+              className={`absolute w-full transition-all duration-300 ease-out left-0 top-[60px] z-[20] bg-white rounded-xl border shadow-sm flex flex-col py-3 ${
+                billBoxOpen
+                  ? 'opacity-100 pointer-events-auto'
+                  : 'opacity-0 pointer-events-none'
+              }`}
+            >
+              {billOptions.map((bill: string, idx: number) => {
+                return (
+                  <div
+                    key={idx}
+                    className='py-1.5 px-4 hover:bg-gray-200 hover:text-blue-400 transition-all duration-300'
+                  >
+                    {bill}
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
         <div className='flex items-center justify-start gap-3 mt-3'>

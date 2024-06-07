@@ -6,6 +6,7 @@ type initialStateType = {
   selectedCategory: string | null
   selectedConditionIndex: number
   selectedPriceOffers: string[] | []
+  billBoxOpen: boolean
 }
 
 const initialState: initialStateType = {
@@ -14,6 +15,7 @@ const initialState: initialStateType = {
   selectedCategory: null,
   selectedConditionIndex: 0,
   selectedPriceOffers: ['ფასის შეთავაზება'],
+  billBoxOpen: false,
 }
 
 const productSlice = createSlice({
@@ -52,6 +54,9 @@ const productSlice = createSlice({
         state.selectedPriceOffers.push(priceOffer)
       }
     },
+    toggleBillBox: (state) => {
+      state.billBoxOpen = !state.billBoxOpen
+    },
   },
 })
 
@@ -64,4 +69,5 @@ export const {
   deleteSelectedCategory,
   selectConditionIndex,
   selectPriceOffer,
+  toggleBillBox,
 } = productSlice.actions
