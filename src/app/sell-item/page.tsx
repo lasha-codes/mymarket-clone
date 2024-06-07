@@ -2,6 +2,7 @@ import CategorySelector from '@/components/CategorySelector'
 import StatementTypes from '@/components/statementTypes'
 import ProductCondition from '@/components/ProductCondition'
 import AddImages from '@/components/AddImages'
+import ProductInfo from '@/components/ProductInfo'
 
 export const productTypes = [
   'სახლი და ბაღი',
@@ -53,6 +54,7 @@ const SellItemPage = () => {
             </div>
           </div>
           <AddImages />
+          <ProductInfo />
         </div>
       </main>
     </>

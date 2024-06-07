@@ -1,4 +1,5 @@
 import { BsYoutube } from 'react-icons/bs'
+import Image from 'next/image'
 
 const AddImages = () => {
   return (
@@ -7,7 +8,12 @@ const AddImages = () => {
   px-10 w-full'
     >
       <div className='w-full flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-[#EDF3FC]'>
-        <img src='https://www.mymarket.ge/react/build/static/media/add-form-info.dc03cdcc547c6ccd0643.svg' />
+        <Image
+          src='https://www.mymarket.ge/react/build/static/media/add-form-info.dc03cdcc547c6ccd0643.svg'
+          width={40}
+          height={40}
+          alt='hand pointing image'
+        />
         <h4 className='text-[14px] opacity-90'>
           სწორად შერჩეული ფოტოებით მეტ ადამიანს დააინტერესებ.
         </h4>
@@ -16,8 +22,9 @@ const AddImages = () => {
         htmlFor='image'
         className='rounded-3xl border-[3px] cursor-pointer border-dashed border-mainYellow w-full h-[250px] flex flex-col gap-2 justify-center items-center'
       >
-        <img
-          className='h-[40px]'
+        <Image
+          width={40}
+          height={40}
           src='https://www.mymarket.ge/react/build/static/media/open-shop-logo-icon.3bfff0a1a317d08b2cbe.svg'
           alt='camera-icon'
         />

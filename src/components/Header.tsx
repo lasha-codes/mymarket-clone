@@ -15,7 +15,7 @@ const links = [
 
 const Header = () => {
   return (
-    <header className='flex flex-col items-start gap-9'>
+    <header className='flex flex-col items-start gap-9 px-[200px] max-2xl:px-[150px] max-lg:px-[80px] max-md:px-[35px] max-sm:px-[20px]'>
       <div className='w-full flex items-center justify-between relative'>
         <div className='absolute w-screen h-[1px] bg-gray-200 bottom-1.5 left-1/2 translate-x-[-50%]' />
         <Link href='/' className='relative w-[200px] -ml-[25px] h-[100px]'>
