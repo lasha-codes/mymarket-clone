@@ -1,5 +1,6 @@
 import CategorySelector from '@/components/CategorySelector'
 import StatementTypes from '@/components/statementTypes'
+import ProductCondition from '@/components/ProductCondition'
 
 export const productTypes = [
   'სახლი და ბაღი',
@@ -19,6 +20,9 @@ export const productTypes = [
 ]
 
 export const statementTypes = ['გაყიდვა', 'შეძენა', 'გაქირავება', 'მომსახურება']
+
+export const productConditions = ['მეორადი', 'ახალი', 'ახალივით', 'ნაწილებად']
+
 const SellItemPage = () => {
   return (
     <>
@@ -38,6 +42,7 @@ const SellItemPage = () => {
               </h4>
 
               <CategorySelector />
+              <ProductCondition />
             </div>
           </div>
         </div>

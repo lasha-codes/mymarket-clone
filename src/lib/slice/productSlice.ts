@@ -4,12 +4,14 @@ type initialStateType = {
   selectorOpened: boolean
   selectedTypeIndex: number
   selectedCategory: string | null
+  selectedConditionIndex: number
 }
 
 const initialState: initialStateType = {
   selectorOpened: false,
   selectedTypeIndex: 0,
   selectedCategory: null,
+  selectedConditionIndex: 0,
 }
 
 const productSlice = createSlice({
@@ -31,6 +33,10 @@ const productSlice = createSlice({
     deleteSelectedCategory: (state) => {
       state.selectedCategory = null
     },
+    selectConditionIndex: (state, { payload }) => {
+      const { index } = payload
+      state.selectedConditionIndex = index
+    },
   },
 })
 
@@ -41,4 +47,5 @@ export const {
   selectTypeIndex,
   selectCategory,
   deleteSelectedCategory,
+  selectConditionIndex,
 } = productSlice.actions

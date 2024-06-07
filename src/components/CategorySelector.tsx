@@ -17,8 +17,6 @@ const CategorySelector = () => {
     (state: any) => state.product
   )
 
-  console.log(selectedCategory)
-
   return (
     <>
       <div
@@ -35,6 +33,7 @@ text-gray-400 rounded-xl border transition-all duration-200 ease-linear ${
       >
         <input
           type='text'
+          placeholder='აირჩიე/ჩაწერე კატეგორია'
           className={`absolute w-full cursor-pointer z-[1] h-full bg-transparent transition-all ease-linear outline-none ${
             selectedCategory && 'opacity-0 invisible pointer-events-none'
           }`}
@@ -43,9 +42,7 @@ text-gray-400 rounded-xl border transition-all duration-200 ease-linear ${
           className={`${
             selectedCategory && 'opacity-0 invisible  pointer-events-none'
           } transition-all ease-linear`}
-        >
-          აირჩიე/ჩაწერე კატეგორია
-        </span>
+        ></span>
         <IoIosArrowDown
           className={`z-[10] ${
             selectorOpened ? 'rotate-180' : 'rotate-0'
