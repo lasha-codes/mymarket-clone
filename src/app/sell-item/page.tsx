@@ -1,5 +1,4 @@
 import CategorySelector from '@/components/CategorySelector'
-import { IoIosArrowDown } from 'react-icons/io'
 
 export const productTypes = [
   'სახლი და ბაღი',
@@ -49,14 +48,7 @@ const SellItemPage = () => {
                 აირჩიე/ჩაწერე კატეგორია{' '}
                 <span className='text-sm text-red-500'>*</span>
               </h4>
-              <div className='w-full py-4 px-4 relative text-[14px] cursor-pointer text-gray-400 rounded-xl border flex items-center justify-between'>
-                <input
-                  type='text'
-                  className='absolute w-full cursor-pointer z-[1] h-full bg-transparent outline-none'
-                />
-                <span>აირჩიე/ჩაწერე კატეგორია</span>
-                <IoIosArrowDown className='z-[10]' />
-              </div>
+
               <CategorySelector />
             </div>
           </div>
