@@ -3,6 +3,7 @@ import StatementTypes from '@/components/statementTypes'
 import ProductCondition from '@/components/ProductCondition'
 import AddImages from '@/components/AddImages'
 import ProductInfo from '@/components/ProductInfo'
+import SelectPrice from '@/components/SelectPrice'
 
 export const productTypes = [
   'სახლი და ბაღი',
@@ -22,8 +23,8 @@ export const productTypes = [
 ]
 
 export const statementTypes = ['გაყიდვა', 'შეძენა', 'გაქირავება', 'მომსახურება']
-
 export const productConditions = ['მეორადი', 'ახალი', 'ახალივით', 'ნაწილებად']
+export const priceOptions = ['ფასის შეთავაზება', 'ფასი შეთავაზებით']
 
 const SellItemPage = () => {
   return (
@@ -55,6 +56,7 @@ const SellItemPage = () => {
           </div>
           <AddImages />
           <ProductInfo />
+          <SelectPrice />
         </div>
       </main>
     </>

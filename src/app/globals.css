@@ -7,3 +7,8 @@
 * {
   font-family: 'Noto Sans Georgian';
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
