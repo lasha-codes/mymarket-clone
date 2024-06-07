@@ -25,7 +25,7 @@ export default function RootLayout({
         }}
       >
         <Provider>
-          <body className={`${inter.className} px-7 p-5`}>{children}</body>
+          <body className={`${inter.className}`}>{children}</body>
         </Provider>
       </ClerkProvider>
     </html>
