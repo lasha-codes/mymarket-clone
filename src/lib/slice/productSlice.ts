@@ -7,6 +7,7 @@ type initialStateType = {
   selectedConditionIndex: number
   selectedPriceOffers: string[] | []
   billBoxOpen: boolean
+  selectedBill: string
 }
 
 const initialState: initialStateType = {
@@ -16,6 +17,7 @@ const initialState: initialStateType = {
   selectedConditionIndex: 0,
   selectedPriceOffers: ['ფასის შეთავაზება'],
   billBoxOpen: false,
+  selectedBill: 'ლარი',
 }
 
 const productSlice = createSlice({
@@ -57,6 +59,11 @@ const productSlice = createSlice({
     toggleBillBox: (state) => {
       state.billBoxOpen = !state.billBoxOpen
     },
+    selectBillType: (state, { payload }) => {
+      const { selectedBill } = payload
+      state.selectedBill = selectedBill
+      state.billBoxOpen = false
+    },
   },
 })
 
@@ -70,4 +77,5 @@ export const {
   selectConditionIndex,
   selectPriceOffer,
   toggleBillBox,
+  selectBillType,
 } = productSlice.actions

@@ -5,10 +5,11 @@ import { billOptions, priceOptions } from '@/app/sell-item/page'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectPriceOffer } from '@/lib/slice/productSlice'
 import { toggleBillBox } from '@/lib/slice/productSlice'
+import { selectBillType } from '@/lib/slice/productSlice'
 
 const SelectPrice = () => {
   const dispatch = useDispatch()
-  const { selectedPriceOffers, billBoxOpen } = useSelector(
+  const { selectedPriceOffers, billBoxOpen, selectedBill } = useSelector(
     (state: any) => state.product
   )
   return (
@@ -27,9 +28,9 @@ const SelectPrice = () => {
           />
           <div
             onClick={() => dispatch(toggleBillBox())}
-            className={`border relative border-l-0 text-gray-500 cursor-pointer text-[14px] h-[55px] flex px-4 gap-10 items-center rounded-tr-xl rounded-br-xl`}
+            className={`border relative border-l-0 text-gray-500 cursor-pointer text-[14px] h-[55px] flex min-w-[155px] max-w-[200px] px-5 justify-between items-center rounded-tr-xl rounded-br-xl`}
           >
-            <span>ლარი</span>
+            <span>{selectedBill}</span>
             <IoIosArrowDown
               className={`transition-all duration-300 ease-in-out ${
                 billBoxOpen && 'rotate-180'
@@ -45,8 +46,14 @@ const SelectPrice = () => {
               {billOptions.map((bill: string, idx: number) => {
                 return (
                   <div
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      dispatch(selectBillType({ selectedBill: bill }))
+                    }}
                     key={idx}
-                    className='py-1.5 px-4 hover:bg-gray-200 hover:text-blue-400 transition-all duration-300'
+                    className={`py-1.5 px-4 hover:bg-gray-200 hover:text-blue-400 transition-all duration-300 ${
+                      selectedBill === bill && 'text-blue-400'
+                    }`}
                   >
                     {bill}
                   </div>
