@@ -68,6 +68,7 @@ const productSlice = createSlice({
     },
     addImage: (state, { payload }) => {
       const { imageURL } = payload
+
       state.productImages.push(imageURL)
     },
   },
