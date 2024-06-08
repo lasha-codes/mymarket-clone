@@ -4,6 +4,7 @@ import ProductCondition from '@/components/ProductCondition'
 import AddImages from '@/components/AddImages'
 import ProductInfo from '@/components/ProductInfo'
 import SelectPrice from '@/components/SelectPrice'
+import ContactInformation from '@/components/ContactInformation'
 
 export const productTypes = [
   'სახლი და ბაღი',
@@ -26,12 +27,43 @@ export const statementTypes = ['გაყიდვა', 'შეძენა', '�
 export const productConditions = ['მეორადი', 'ახალი', 'ახალივით', 'ნაწილებად']
 export const priceOptions = ['ფასის შეთავაზება', 'ფასი შეთავაზებით']
 export const billOptions = ['ლარი', 'დოლარი']
+export const popularCities = [
+  'თბილისი',
+  'ბათუმი',
+  'ქუთაისი',
+  'რუსთავი',
+  'ზუგდიდი',
+  'გორი',
+  'სიღნაღი',
+  'ბორჯომი',
+  'ქახეთი',
+  'წალენჯიხა',
+  'მცხეთა',
+  'წყალტუბო',
+  'ახალქალაქი',
+  'სამტრედია',
+  'თელავი',
+  'ზესტაფონი',
+  'საგარეჯო',
+  'ხაშური',
+  'დუშეთი',
+  'წალკა',
+  'წნორი',
+  'თეთრიწყარო',
+  'ტყვარჩელი',
+  'ახმეტა',
+  'მარნეული',
+  'საჩხერე',
+  'ლანჩხუთი',
+  'მარტვილი',
+  'ქვემო თაგლია',
+]
 
 const SellItemPage = () => {
   return (
     <>
       <main className='w-screen flex justify-center bg-gray-100 py-10'>
-        <div className='flex flex-col w-[700px] gap-4'>
+        <div className='flex flex-col w-[700px] gap-4 lg:w-[850px] xl:w-[1000px] 2xl:w-[1150px]'>
           <div className='w-full flex items-start flex-col gap-7'>
             <h2 className='text-[27px] font-semibold'>განცხადების დამატება</h2>
             <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
@@ -58,6 +90,7 @@ const SellItemPage = () => {
           <AddImages />
           <ProductInfo />
           <SelectPrice />
+          <ContactInformation />
         </div>
       </main>
     </>

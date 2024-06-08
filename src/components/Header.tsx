@@ -72,7 +72,7 @@ const Header = () => {
             className='border-[3px] flex-grow px-5 py-5 placeholder:text-lg outline-none border-mainYellow rounded-xl'
             placeholder='მაგ: Iphone 14'
           />
-          <button className='flex items-center bg-[#FEC900] hover:bg-mainYellow cursor-pointer py-5 rounded-xl px-12 gap-2 text-[18px]'>
+          <button className='flex items-center bg-[#FEC900] hover:bg-[#ffde68] cursor-pointer transition-all ease-linear py-5 rounded-xl px-12 gap-2 text-[18px]'>
             <IoIosSearch />
             <span>ძებნა</span>
           </button>

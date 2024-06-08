@@ -44,9 +44,9 @@ text-gray-400 rounded-xl border transition-all duration-200 ease-linear ${
           } transition-all ease-linear`}
         ></span>
         <IoIosArrowDown
-          className={`z-[10] ${
+          className={`transition-all duration-300 z-[15] ease-in-out ${
             selectorOpened ? 'rotate-180' : 'rotate-0'
-          } transition-all duration-300 z-[15] ease-in-out opacity-100 ${
+          }  opacity-100 ${
             selectedCategory && '!opacity-0 pointer-events-none'
           }`}
         />

@@ -95,7 +95,7 @@ const AddImages = () => {
           <button
             onClick={() => dispatch(addImage({ imageURL }), setImageURL(''))}
             disabled={imageURL.length === 0}
-            className='bg-mainYellow rounded-xl px-6 py-2.5 font-medium hover:bg-[#e6bb5f] transition-all duration-200 ease-linear disabled:opacity-60 disabled:cursor-not-allowed'
+            className='bg-mainYellow rounded-xl px-6 py-2.5 font-medium hover:bg-[#e6bb5f] transition-all duration-200 ease-linear disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-mainYellow'
           >
             ატვირთვა
           </button>
