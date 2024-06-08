@@ -68,8 +68,13 @@ const productSlice = createSlice({
     },
     addImage: (state, { payload }) => {
       const { imageURL } = payload
-
       state.productImages.push(imageURL)
+    },
+    removeImage: (state, { payload }) => {
+      const { imageIndex } = payload
+      state.productImages = state.productImages.filter((_, idx: number) => {
+        return imageIndex !== idx
+      })
     },
   },
 })
@@ -86,4 +91,5 @@ export const {
   toggleBillBox,
   selectBillType,
   addImage,
+  removeImage,
 } = productSlice.actions

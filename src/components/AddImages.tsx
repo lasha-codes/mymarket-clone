@@ -2,8 +2,9 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { addImage } from '@/lib/slice/productSlice'
-
+import { removeImage } from '@/lib/slice/productSlice'
 import { BsYoutube } from 'react-icons/bs'
+import { FaRegTrashAlt } from 'react-icons/fa'
 import Image from 'next/image'
 
 const AddImages = () => {
@@ -60,12 +61,21 @@ const AddImages = () => {
           </label>
           {productImages.map((URL: string, idx: number) => {
             return (
-              <img
-                src={URL}
-                key={idx}
-                className='object-cover rounded-3xl w-[155px] h-[155px]'
-                alt='product-image'
-              />
+              <div key={idx} className='relative group'>
+                <img
+                  src={URL}
+                  className='object-cover rounded-3xl w-[155px] h-[155px]'
+                  alt='product-image'
+                />
+                <div className='absolute left-0 top-0 rounded-3xl flex flex-col items-center justify-center w-full h-full bg-gray-500/70 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 ease-linear'>
+                  <div
+                    onClick={() => dispatch(removeImage({ imageIndex: idx }))}
+                    className='rounded-xl p-3 cursor-pointer bg-zinc-transparent hover:bg-zinc-300/60 transition-all duration-200 ease-linear'
+                  >
+                    <FaRegTrashAlt className='text-[27px] text-white' />
+                  </div>
+                </div>
+              </div>
             )
           })}
         </div>
