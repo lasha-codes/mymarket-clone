@@ -8,6 +8,7 @@ type initialStateType = {
   selectedPriceOffers: string[] | []
   billBoxOpen: boolean
   selectedBill: string
+  productImages: string[]
 }
 
 const initialState: initialStateType = {
@@ -18,6 +19,7 @@ const initialState: initialStateType = {
   selectedPriceOffers: ['ფასის შეთავაზება'],
   billBoxOpen: false,
   selectedBill: 'ლარი',
+  productImages: [],
 }
 
 const productSlice = createSlice({
@@ -64,6 +66,10 @@ const productSlice = createSlice({
       state.selectedBill = selectedBill
       state.billBoxOpen = false
     },
+    addImage: (state, { payload }) => {
+      const { imageURL } = payload
+      state.productImages.push(imageURL)
+    },
   },
 })
 
@@ -78,4 +84,5 @@ export const {
   selectPriceOffer,
   toggleBillBox,
   selectBillType,
+  addImage,
 } = productSlice.actions

@@ -22,8 +22,12 @@ const SelectPrice = () => {
         </h4>
         <div className='w-[65%] flex items-center'>
           <input
+            disabled={selectedPriceOffers.includes('ფასი შეთავაზებით')}
             type='number'
-            className='border h-[55px] px-5 rounded-bl-xl w-full rounded-tl-xl outline-none placeholder:text-black/50 text-black/60'
+            className={`border h-[55px] px-5 rounded-bl-xl w-full rounded-tl-xl outline-none placeholder:text-black/50 text-black/60 ${
+              selectedPriceOffers.includes('ფასი შეთავაზებით') &&
+              'cursor-not-allowed'
+            }`}
             placeholder='0'
           />
           <div
