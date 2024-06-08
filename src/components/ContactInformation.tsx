@@ -10,6 +10,7 @@ const ContactInformation = () => {
   const { locationBoxOpen, sellerLocation } = useSelector(
     (state: any) => state.product
   )
+
   return (
     <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
       <h3 className='text-[16px] font-semibold'>საკონტაქტო ინფორმაცია</h3>
@@ -25,12 +26,20 @@ const ContactInformation = () => {
             აირჩიე მდებარეობა{' '}
             <span className='text-[13px] text-red-500'>*</span>
           </h4>
-          <div className='flex items-center justify-between text-gray-400 w-full border h-[50px] rounded-xl overflow-hidden'>
+          <div
+            className={`flex items-center transition-all duration-300 ease-linear justify-between text-gray-400 w-full border h-[50px] rounded-xl overflow-hidden ${
+              locationBoxOpen && '!border-blue-400'
+            }`}
+          >
             <input
               className='w-full h-full flex-grow px-5 outline-none cursor-pointer placeholder:text-[14px]'
               placeholder='აირჩიე მდებარეობა'
             />
-            <IoIosArrowDown className='mr-4 cursor-pointer' />
+            <IoIosArrowDown
+              className={`mr-4 transition-all duration-300 ease-in-out cursor-pointer ${
+                locationBoxOpen && 'rotate-180'
+              }`}
+            />
           </div>
           <LocationSelector />
         </div>
