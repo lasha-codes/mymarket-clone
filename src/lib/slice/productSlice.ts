@@ -9,6 +9,8 @@ type initialStateType = {
   billBoxOpen: boolean
   selectedBill: string
   productImages: string[]
+  sellerLocation: string | null
+  locationBoxOpen: boolean
 }
 
 const initialState: initialStateType = {
@@ -20,6 +22,8 @@ const initialState: initialStateType = {
   billBoxOpen: false,
   selectedBill: 'ლარი',
   productImages: [],
+  sellerLocation: null,
+  locationBoxOpen: false,
 }
 
 const productSlice = createSlice({
@@ -76,6 +80,9 @@ const productSlice = createSlice({
         return imageIndex !== idx
       })
     },
+    toggleLocationBox: (state) => {
+      state.locationBoxOpen = !state.locationBoxOpen
+    },
   },
 })
 
@@ -92,4 +99,5 @@ export const {
   selectBillType,
   addImage,
   removeImage,
+  toggleLocationBox,
 } = productSlice.actions

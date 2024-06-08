@@ -2,20 +2,32 @@
 
 import { IoIosArrowDown } from 'react-icons/io'
 import LocationSelector from './LocationSelector'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleLocationBox } from '@/lib/slice/productSlice'
 
 const ContactInformation = () => {
+  const dispatch = useDispatch()
+  const { locationBoxOpen, sellerLocation } = useSelector(
+    (state: any) => state.product
+  )
   return (
     <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
       <h3 className='text-[16px] font-semibold'>საკონტაქტო ინფორმაცია</h3>
       <div className='flex flex-col gap-6 w-full'>
-        <div className='flex flex-col gap-2 items-start relative'>
+        <div
+          onClick={() => {
+            if (sellerLocation) return
+            dispatch(toggleLocationBox())
+          }}
+          className='flex flex-col gap-2 items-start relative cursor-pointer'
+        >
           <h4 className='text-[14px] font-medium'>
             აირჩიე მდებარეობა{' '}
             <span className='text-[13px] text-red-500'>*</span>
           </h4>
           <div className='flex items-center justify-between text-gray-400 w-full border h-[50px] rounded-xl overflow-hidden'>
             <input
-              className='w-full h-full flex-grow px-5 outline-none placeholder:text-[14px]'
+              className='w-full h-full flex-grow px-5 outline-none cursor-pointer placeholder:text-[14px]'
               placeholder='აირჩიე მდებარეობა'
             />
             <IoIosArrowDown className='mr-4 cursor-pointer' />
