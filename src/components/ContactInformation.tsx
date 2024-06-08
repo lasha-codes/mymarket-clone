@@ -4,6 +4,7 @@ import { IoIosArrowDown } from 'react-icons/io'
 import LocationSelector from './LocationSelector'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleLocationBox } from '@/lib/slice/productSlice'
+import SelectedLocation from './SelectedLocation'
 
 const ContactInformation = () => {
   const dispatch = useDispatch()
@@ -27,19 +28,22 @@ const ContactInformation = () => {
             <span className='text-[13px] text-red-500'>*</span>
           </h4>
           <div
-            className={`flex items-center transition-all duration-300 ease-linear justify-between text-gray-400 w-full border h-[50px] rounded-xl overflow-hidden ${
+            className={`flex items-center transition-all duration-300 ease-linear justify-between text-gray-400 w-full border h-[50px] rounded-xl overflow-hidden relative ${
               locationBoxOpen && '!border-blue-400'
             }`}
           >
             <input
-              className='w-full h-full flex-grow px-5 outline-none cursor-pointer placeholder:text-[14px]'
+              className={`w-full h-full flex-grow px-5 outline-none cursor-pointer placeholder:text-[14px] transition-all ease-linear ${
+                sellerLocation && 'opacity-0 pointer-events-none'
+              }`}
               placeholder='აირჩიე მდებარეობა'
             />
             <IoIosArrowDown
               className={`mr-4 transition-all duration-300 ease-in-out cursor-pointer ${
                 locationBoxOpen && 'rotate-180'
-              }`}
+              } ${sellerLocation && 'opacity-0 pointer-events-none'}`}
             />
+            <SelectedLocation />
           </div>
           <LocationSelector />
         </div>

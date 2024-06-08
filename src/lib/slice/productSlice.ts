@@ -87,6 +87,9 @@ const productSlice = createSlice({
       const { selectedLocation }: { selectedLocation: string } = payload
       state.sellerLocation = selectedLocation
     },
+    removeSelectedLocation: (state) => {
+      state.sellerLocation = null
+    },
   },
 })
 
@@ -105,4 +108,5 @@ export const {
   removeImage,
   toggleLocationBox,
   selectSellerLocation,
+  removeSelectedLocation,
 } = productSlice.actions
