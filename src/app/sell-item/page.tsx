@@ -62,7 +62,7 @@ export const popularCities = [
 const SellItemPage = () => {
   return (
     <>
-      <main className='w-screen flex justify-center bg-gray-100 py-10'>
+      <main className='w-screen flex justify-center bg-gray-100 py-10 overflow-y-scroll'>
         <div className='flex flex-col w-[700px] gap-4 lg:w-[850px] xl:w-[1000px] 2xl:w-[1150px]'>
           <div className='w-full flex items-start flex-col gap-7'>
             <h2 className='text-[27px] font-semibold'>განცხადების დამატება</h2>

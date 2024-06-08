@@ -1,11 +1,14 @@
+'use client'
+
 import { IoIosArrowDown } from 'react-icons/io'
+import LocationSelector from './LocationSelector'
 
 const ContactInformation = () => {
   return (
     <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
       <h3 className='text-[16px] font-semibold'>საკონტაქტო ინფორმაცია</h3>
       <div className='flex flex-col gap-6 w-full'>
-        <div className='flex flex-col gap-2 items-start'>
+        <div className='flex flex-col gap-2 items-start relative'>
           <h4 className='text-[14px] font-medium'>
             აირჩიე მდებარეობა{' '}
             <span className='text-[13px] text-red-500'>*</span>
@@ -17,6 +20,7 @@ const ContactInformation = () => {
             />
             <IoIosArrowDown className='mr-4 cursor-pointer' />
           </div>
+          <LocationSelector />
         </div>
         <div className='flex flex-col gap-2 items-start'>
           <label
