@@ -10,8 +10,7 @@ export const uploadProduct = async (
   sellerName: string,
   sellerPhone: number,
   youtubeURL: string,
-  productCategory: string,
-  productType: string,
+  selectedCategory: string,
   productCondition: string,
   selectedPriceOffers: string[] | [],
   selectedBill: number
@@ -27,9 +26,10 @@ export const uploadProduct = async (
       sellerName,
       sellerPhone,
       youtubeURL,
-      productCategory,
-      productType,
+      selectedCategory,
       productCondition,
+      selectedPriceOffers,
+      selectedBill,
     })
     console.log(data)
   } catch (err) {

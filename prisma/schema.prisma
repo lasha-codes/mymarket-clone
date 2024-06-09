@@ -14,15 +14,22 @@ datasource db {
 }
 
 model Product {
-  id          String   @id @default(uuid())
-  name        String
-  images      String[]
-  description String
-  type        String
-  price       Int
-  condition   String
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  id            String   @id @default(uuid())
+  name          String
+  images        String[]
+  description   String
+  type          String
+  price         Int
+  condition     String
+  category      String
+  youtubeURL    String?
+  location      String
+  contactName   String
+  contactNumber String
+  priceDealType String[]
+  userId        String
+  bill          String
+  user          User     @relation(fields: [userId], references: [id])
 }
 
 model User {
