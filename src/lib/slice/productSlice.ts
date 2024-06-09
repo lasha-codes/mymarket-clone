@@ -12,6 +12,7 @@ type initialStateType = {
   sellerLocation: string | null
   locationBoxOpen: boolean
   locationSearch: string
+  categorySearch: string
 }
 
 const initialState: initialStateType = {
@@ -26,6 +27,7 @@ const initialState: initialStateType = {
   sellerLocation: null,
   locationBoxOpen: false,
   locationSearch: '',
+  categorySearch: '',
 }
 
 const productSlice = createSlice({
@@ -43,6 +45,7 @@ const productSlice = createSlice({
       const { selected } = payload
       state.selectedCategory = selected
       state.selectorOpened = false
+      state.categorySearch = ''
     },
     deleteSelectedCategory: (state) => {
       state.selectedCategory = null
@@ -88,6 +91,7 @@ const productSlice = createSlice({
     selectSellerLocation: (state, { payload }) => {
       const { selectedLocation }: { selectedLocation: string } = payload
       state.sellerLocation = selectedLocation
+      state.locationSearch = ''
     },
     removeSelectedLocation: (state) => {
       state.sellerLocation = null
@@ -95,6 +99,10 @@ const productSlice = createSlice({
     changeSearchVal: (state, { payload }) => {
       const { value } = payload
       state.locationSearch = value
+    },
+    changeCategoryVal: (state, { payload }) => {
+      const { value } = payload
+      state.categorySearch = value
     },
   },
 })
@@ -116,4 +124,5 @@ export const {
   selectSellerLocation,
   removeSelectedLocation,
   changeSearchVal,
+  changeCategoryVal,
 } = productSlice.actions

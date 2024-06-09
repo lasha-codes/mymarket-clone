@@ -7,15 +7,31 @@ import { IoIosArrowDown } from 'react-icons/io'
 import { selectCategory } from '@/lib/slice/productSlice'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { deleteSelectedCategory } from '@/lib/slice/productSlice'
+import { changeCategoryVal } from '@/lib/slice/productSlice'
+import { useEffect, useState } from 'react'
 
 const CategorySelector = () => {
   const dispatch = useDispatch()
   const {
     selectorOpened,
     selectedCategory,
-  }: { selectorOpened: boolean; selectedCategory: string } = useSelector(
-    (state: any) => state.product
-  )
+    categorySearch,
+  }: {
+    selectorOpened: boolean
+    selectedCategory: string
+    categorySearch: string
+  } = useSelector((state: any) => state.product)
+  const [productsCopy, setProductsCopy] = useState<string[]>(productTypes)
+
+  useEffect(() => {
+    if (categorySearch.length === 0) {
+      return setProductsCopy(productTypes)
+    }
+    const filteredProducts = [...productTypes].filter((type: string) => {
+      return type.toLowerCase().includes(categorySearch.toLowerCase())
+    })
+    setProductsCopy(filteredProducts)
+  }, [categorySearch])
 
   return (
     <>
@@ -32,6 +48,10 @@ text-gray-400 rounded-xl border transition-all duration-200 ease-linear ${
         }`}
       >
         <input
+          value={categorySearch}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            dispatch(changeCategoryVal({ value: e.target.value }))
+          }
           type='text'
           placeholder='აირჩიე/ჩაწერე კატეგორია'
           className={`absolute w-full cursor-pointer z-[1] h-full bg-transparent transition-all ease-linear outline-none ${
@@ -65,25 +85,31 @@ text-gray-400 rounded-xl border transition-all duration-200 ease-linear ${
         </div>
       </div>
       <div
-        className={`absolute z-[100] flex flex-col w-full h-[300px] overflow-y-scroll 
+        className={`absolute z-[100] flex flex-col w-full max-h-[300px] ${
+          productsCopy.length >= 6 && 'overflow-y-scroll'
+        } 
       top-[100px] border py-4 text-[15.5px] left-1/2 items-start transition-all duration-300 ease-out -translate-x-1/2 bg-white rounded-xl ${
         selectorOpened
           ? 'opacity-100 pointer-events-auto'
           : 'opacity-0 pointer-events-none'
       }`}
       >
-        {productTypes.map((product: string, idx: number) => {
-          return (
-            <div
-              onClick={() => dispatch(selectCategory({ selected: product }))}
-              className='w-full py-2 cursor-pointer hover:bg-gray-200 
+        {productsCopy.length !== 0 ? (
+          productsCopy.map((product: string, idx: number) => {
+            return (
+              <div
+                onClick={() => dispatch(selectCategory({ selected: product }))}
+                className='w-full py-2 cursor-pointer hover:bg-gray-200 
               hover:text-blue-400 transition-all ease-linear px-5'
-              key={idx}
-            >
-              {product}
-            </div>
-          )
-        })}
+                key={idx}
+              >
+                {product}
+              </div>
+            )
+          })
+        ) : (
+          <h4 className='mx-auto font-medium text-gray-400'>არ მოიძებნა</h4>
+        )}
       </div>
     </>
   )
