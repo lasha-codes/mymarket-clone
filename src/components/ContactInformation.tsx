@@ -3,12 +3,12 @@
 import { IoIosArrowDown } from 'react-icons/io'
 import LocationSelector from './LocationSelector'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleLocationBox } from '@/lib/slice/productSlice'
+import { toggleLocationBox, changeSearchVal } from '@/lib/slice/productSlice'
 import SelectedLocation from './SelectedLocation'
 
 const ContactInformation = () => {
   const dispatch = useDispatch()
-  const { locationBoxOpen, sellerLocation } = useSelector(
+  const { locationBoxOpen, sellerLocation, locationSearch } = useSelector(
     (state: any) => state.product
   )
 
@@ -16,6 +16,12 @@ const ContactInformation = () => {
     <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
       <h3 className='text-[16px] font-semibold'>საკონტაქტო ინფორმაცია</h3>
       <div className='flex flex-col gap-6 w-full'>
+        <h4
+          onClick={(e) => e.stopPropagation()}
+          className='text-[14px] font-medium -mb-[10px]'
+        >
+          აირჩიე მდებარეობა <span className='text-[13px] text-red-500'>*</span>
+        </h4>
         <div
           onClick={() => {
             if (sellerLocation) return
@@ -23,16 +29,16 @@ const ContactInformation = () => {
           }}
           className='flex flex-col gap-2 items-start relative cursor-pointer'
         >
-          <h4 className='text-[14px] font-medium'>
-            აირჩიე მდებარეობა{' '}
-            <span className='text-[13px] text-red-500'>*</span>
-          </h4>
           <div
             className={`flex items-center transition-all duration-300 ease-linear justify-between text-gray-400 w-full border h-[50px] rounded-xl overflow-hidden relative ${
               locationBoxOpen && '!border-blue-400'
             }`}
           >
             <input
+              value={locationSearch}
+              onChange={(e) => {
+                dispatch(changeSearchVal({ value: e.target.value }))
+              }}
               className={`w-full h-full flex-grow px-5 outline-none cursor-pointer placeholder:text-[14px] transition-all ease-linear ${
                 sellerLocation && 'opacity-0 pointer-events-none'
               }`}

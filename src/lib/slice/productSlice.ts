@@ -11,6 +11,7 @@ type initialStateType = {
   productImages: string[]
   sellerLocation: string | null
   locationBoxOpen: boolean
+  locationSearch: string
 }
 
 const initialState: initialStateType = {
@@ -24,6 +25,7 @@ const initialState: initialStateType = {
   productImages: [],
   sellerLocation: null,
   locationBoxOpen: false,
+  locationSearch: '',
 }
 
 const productSlice = createSlice({
@@ -90,6 +92,10 @@ const productSlice = createSlice({
     removeSelectedLocation: (state) => {
       state.sellerLocation = null
     },
+    changeSearchVal: (state, { payload }) => {
+      const { value } = payload
+      state.locationSearch = value
+    },
   },
 })
 
@@ -109,4 +115,5 @@ export const {
   toggleLocationBox,
   selectSellerLocation,
   removeSelectedLocation,
+  changeSearchVal,
 } = productSlice.actions
