@@ -16,9 +16,9 @@ type initialStateType = {
   productTitle: string
   productDesc: string
   youtubeURL: string
-  productPrice: number | null
+  productPrice: number | string
   sellerName: string
-  sellerPhone: number | null
+  sellerPhone: number | string
 }
 
 const initialState: initialStateType = {
@@ -37,9 +37,9 @@ const initialState: initialStateType = {
   productTitle: '',
   productDesc: '',
   youtubeURL: '',
-  productPrice: null,
+  productPrice: '',
   sellerName: '',
-  sellerPhone: null,
+  sellerPhone: '',
 }
 
 const productSlice = createSlice({

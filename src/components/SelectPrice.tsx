@@ -6,12 +6,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectPriceOffer } from '@/lib/slice/productSlice'
 import { toggleBillBox } from '@/lib/slice/productSlice'
 import { selectBillType } from '@/lib/slice/productSlice'
+import { changeInputsVal } from '@/lib/slice/productSlice'
 
 const SelectPrice = () => {
   const dispatch = useDispatch()
-  const { selectedPriceOffers, billBoxOpen, selectedBill } = useSelector(
-    (state: any) => state.product
-  )
+  const { selectedPriceOffers, billBoxOpen, selectedBill, productPrice } =
+    useSelector((state: any) => state.product)
   return (
     <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
       <h3 className='text-[16px] font-semibold'>ფასი</h3>
@@ -22,6 +22,15 @@ const SelectPrice = () => {
         </h4>
         <div className='w-[65%] flex items-center'>
           <input
+            value={productPrice}
+            onChange={(e) =>
+              dispatch(
+                changeInputsVal({
+                  targetedValue: 'productPrice',
+                  value: e.target.value,
+                })
+              )
+            }
             disabled={selectedPriceOffers.includes('ფასი შეთავაზებით')}
             type='number'
             className={`border h-[55px] px-5 rounded-bl-xl w-full rounded-tl-xl outline-none placeholder:text-black/50 text-black/60 ${

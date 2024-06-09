@@ -2,14 +2,16 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { addImage } from '@/lib/slice/productSlice'
-import { removeImage } from '@/lib/slice/productSlice'
+import { removeImage, changeInputsVal } from '@/lib/slice/productSlice'
 import { BsYoutube } from 'react-icons/bs'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import Image from 'next/image'
 
 const AddImages = () => {
   const dispatch = useDispatch()
-  const { productImages } = useSelector((state: any) => state.product)
+  const { productImages, youtubeURL } = useSelector(
+    (state: any) => state.product
+  )
   const [imageURL, setImageURL] = useState<string>('')
 
   console.log(productImages)
@@ -108,6 +110,15 @@ const AddImages = () => {
             <BsYoutube className='text-xl text-red-500' /> Youtube ვიდეო
           </label>
           <input
+            value={youtubeURL}
+            onChange={(e) =>
+              dispatch(
+                changeInputsVal({
+                  targetedValue: 'youtubeURL',
+                  value: e.target.value,
+                })
+              )
+            }
             id='youtube-url'
             type='text'
             className='w-full outline-none border transition-all duration-200 ease-linear rounded-xl py-2 px-5 focus:border-[#c5d7f3]'

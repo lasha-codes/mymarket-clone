@@ -3,14 +3,22 @@
 import { IoIosArrowDown } from 'react-icons/io'
 import LocationSelector from './LocationSelector'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleLocationBox, changeSearchVal } from '@/lib/slice/productSlice'
+import {
+  toggleLocationBox,
+  changeSearchVal,
+  changeInputsVal,
+} from '@/lib/slice/productSlice'
 import SelectedLocation from './SelectedLocation'
 
 const ContactInformation = () => {
   const dispatch = useDispatch()
-  const { locationBoxOpen, sellerLocation, locationSearch } = useSelector(
-    (state: any) => state.product
-  )
+  const {
+    locationBoxOpen,
+    sellerLocation,
+    locationSearch,
+    sellerPhone,
+    sellerName,
+  } = useSelector((state: any) => state.product)
 
   return (
     <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
@@ -61,6 +69,15 @@ const ContactInformation = () => {
             სახელი <span className='text-[13px] text-red-500'>*</span>
           </label>
           <input
+            value={sellerName}
+            onChange={(e) =>
+              dispatch(
+                changeInputsVal({
+                  targetedValue: 'sellerName',
+                  value: e.target.value,
+                })
+              )
+            }
             type='text'
             id='name'
             className='w-full h-[50px] px-5 outline-none placeholder:text-[14px] border rounded-xl'
@@ -74,6 +91,15 @@ const ContactInformation = () => {
             მიუთითე ტელეფონი <span className='text-[13px] text-red-500'>*</span>
           </label>
           <input
+            value={sellerPhone}
+            onChange={(e) =>
+              dispatch(
+                changeInputsVal({
+                  targetedValue: 'sellerPhone',
+                  value: e.target.value,
+                })
+              )
+            }
             type='number'
             id='phone'
             className='w-full h-[50px] px-5 outline-none placeholder:text-[14px] border rounded-xl'

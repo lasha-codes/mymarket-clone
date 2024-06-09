@@ -1,6 +1,14 @@
+'use client'
+
 import Image from 'next/image'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeInputsVal } from '@/lib/slice/productSlice'
 
 const ProductInfo = () => {
+  const dispatch = useDispatch()
+  const { productTitle, productDesc } = useSelector(
+    (state: any) => state.product
+  )
   return (
     <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
       <h3 className='text-[16px] font-semibold'>ძირითადი მახასიათებლები</h3>
@@ -21,6 +29,15 @@ const ProductInfo = () => {
             სათაური <span className='text-[13px] text-red-500'>*</span>
           </label>
           <input
+            value={productTitle}
+            onChange={(e) =>
+              dispatch(
+                changeInputsVal({
+                  targetedValue: 'productTitle',
+                  value: e.target.value,
+                })
+              )
+            }
             id='title'
             type='text'
             className='w-full border rounded-xl py-3 outline-none px-5'
@@ -31,6 +48,15 @@ const ProductInfo = () => {
             აღწერა
           </label>
           <textarea
+            value={productDesc}
+            onChange={(e) =>
+              dispatch(
+                changeInputsVal({
+                  targetedValue: 'productDesc',
+                  value: e.target.value,
+                })
+              )
+            }
             id='desc'
             className='rounded-xl border px-5 w-full h-[100px] py-3 outline-none resize-none'
           />
