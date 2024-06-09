@@ -13,6 +13,12 @@ type initialStateType = {
   locationBoxOpen: boolean
   locationSearch: string
   categorySearch: string
+  productTitle: string
+  productDesc: string
+  youtubeURL: string
+  productPrice: number | null
+  sellerName: string
+  sellerPhone: number | null
 }
 
 const initialState: initialStateType = {
@@ -28,6 +34,12 @@ const initialState: initialStateType = {
   locationBoxOpen: false,
   locationSearch: '',
   categorySearch: '',
+  productTitle: '',
+  productDesc: '',
+  youtubeURL: '',
+  productPrice: null,
+  sellerName: '',
+  sellerPhone: null,
 }
 
 const productSlice = createSlice({
@@ -104,6 +116,27 @@ const productSlice = createSlice({
       const { value } = payload
       state.categorySearch = value
     },
+    changeInputsVal: (
+      state,
+      {
+        payload,
+      }: { payload: { targetedValue: string; value: string | number } }
+    ) => {
+      const { targetedValue, value } = payload
+      if (targetedValue === 'youtubeURL') {
+        state.youtubeURL = value as string
+      } else if (targetedValue === 'productTitle') {
+        state.productTitle = value as string
+      } else if (targetedValue === 'productDesc') {
+        state.productDesc = value as string
+      } else if (targetedValue === 'productPrice') {
+        state.productPrice = value as number
+      } else if (targetedValue === 'sellerName') {
+        state.sellerName = value as string
+      } else if (targetedValue === 'sellerPhone') {
+        state.sellerPhone = value as number
+      }
+    },
   },
 })
 
@@ -125,4 +158,5 @@ export const {
   removeSelectedLocation,
   changeSearchVal,
   changeCategoryVal,
+  changeInputsVal,
 } = productSlice.actions

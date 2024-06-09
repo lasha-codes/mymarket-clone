@@ -13,6 +13,7 @@
     "@clerk/themes": "^2.1.8",
     "@prisma/client": "^5.15.0",
     "@reduxjs/toolkit": "^2.2.5",
+    "axios": "^1.7.2",
     "next": "14.2.3",
     "prisma": "^5.15.0",
     "react": "^18",
