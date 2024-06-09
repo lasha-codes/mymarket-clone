@@ -5,6 +5,7 @@ import AddImages from '@/components/AddImages'
 import ProductInfo from '@/components/ProductInfo'
 import SelectPrice from '@/components/SelectPrice'
 import ContactInformation from '@/components/ContactInformation'
+import UploadProduct from '@/components/UploadProduct'
 
 export const productTypes = [
   'სახლი და ბაღი',
@@ -91,6 +92,7 @@ const SellItemPage = () => {
           <ProductInfo />
           <SelectPrice />
           <ContactInformation />
+          <UploadProduct />
         </div>
       </main>
     </>

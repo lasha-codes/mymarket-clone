@@ -21,7 +21,7 @@ const ContactInformation = () => {
   } = useSelector((state: any) => state.product)
 
   return (
-    <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
+    <div className='bg-white rounded-tr-2xl rounded-tl-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
       <h3 className='text-[16px] font-semibold'>საკონტაქტო ინფორმაცია</h3>
       <div className='flex flex-col gap-6 w-full'>
         <h4

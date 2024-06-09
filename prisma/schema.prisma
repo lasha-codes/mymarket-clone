@@ -21,10 +21,6 @@ model Product {
   type        String
   price       Int
   condition   String
-  offerType   String?
-  brand       String?
-  model       String?
-  color       String?
   userId      String
   user        User     @relation(fields: [userId], references: [id])
 }
