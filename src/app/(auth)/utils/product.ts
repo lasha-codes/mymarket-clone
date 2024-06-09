@@ -1,4 +1,3 @@
-import prisma from '@/db/db'
 import axios from 'axios'
 
 export const uploadProduct = async (
@@ -13,11 +12,12 @@ export const uploadProduct = async (
   selectedCategory: string,
   productCondition: string,
   selectedPriceOffers: string[] | [],
-  selectedBill: number
+  selectedBill: number,
+  selectedType: string
 ) => {
   'use client'
   try {
-    const { data } = await axios.post('/products', {
+    const { data } = await axios.post('/api/products', {
       productTitle,
       productDesc,
       productPrice,
@@ -30,7 +30,9 @@ export const uploadProduct = async (
       productCondition,
       selectedPriceOffers,
       selectedBill,
+      selectedType,
     })
+
     console.log(data)
   } catch (err) {
     console.log(err)

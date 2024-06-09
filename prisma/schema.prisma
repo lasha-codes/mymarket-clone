@@ -25,10 +25,10 @@ model Product {
   youtubeURL    String?
   location      String
   contactName   String
-  contactNumber String
+  contactNumber Int
   priceDealType String[]
   userId        String
-  bill          String
+  bill          String?
   user          User     @relation(fields: [userId], references: [id])
 }
 

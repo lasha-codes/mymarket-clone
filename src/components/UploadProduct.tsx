@@ -1,7 +1,7 @@
 'use client'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { productConditions } from '@/app/sell-item/page'
+import { productConditions, statementTypes } from '@/app/sell-item/page'
 import { uploadProduct } from '@/app/(auth)/utils/product'
 
 const UploadProduct = () => {
@@ -19,9 +19,11 @@ const UploadProduct = () => {
     selectedPriceOffers,
     selectedBill,
     selectedConditionIndex,
+    selectedTypeIndex,
   } = useSelector((state: any) => state.product)
 
   const productCondition = productConditions[selectedConditionIndex]
+  const selectedType = statementTypes[selectedTypeIndex]
 
   return (
     <div className='bg-white rounded-br-2xl rounded-bl-2xl gap-5 flex items-center justify-between py-7 px-8 w-full'>
@@ -50,7 +52,8 @@ const UploadProduct = () => {
             selectedCategory,
             productCondition,
             selectedPriceOffers,
-            selectedBill
+            selectedBill,
+            selectedType
           )
         }}
         className='px-6 py-3 rounded-xl text-[15px] bg-mainYellow text-white font-semibold hover:opacity-80 transition-all ease-linear'
