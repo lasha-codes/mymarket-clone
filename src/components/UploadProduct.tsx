@@ -3,6 +3,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { productConditions, statementTypes } from '@/app/sell-item/page'
 import { uploadProduct } from '@/app/(auth)/utils/product'
+import { toast } from 'sonner'
 
 const UploadProduct = () => {
   const dispatch = useDispatch()
@@ -40,6 +41,34 @@ const UploadProduct = () => {
       </button>
       <button
         onClick={async () => {
+          if (!selectedCategory) {
+            return toast.error('გთხოვთ აირჩიეთ კატეგორია')
+          }
+          if (productImages.length === 0) {
+            return toast.error('მინიმუმ სავალდებულოა 1 ფოტო')
+          }
+          if (!productTitle) {
+            return toast.error('სათაური სავალდებულოა')
+          }
+          if (!productDesc) {
+            return toast.error('აღწერა სავალდებულოა')
+          }
+          if (
+            selectedPriceOffers.includes('ფასი შეთავაზებით') &&
+            !productPrice
+          ) {
+            return toast.error('ფასის მითითება სავალდებულოა')
+          }
+          if (!sellerLocation) {
+            return toast.error('გთხოვთ მიუთითეთ ადგილმდებარეობა')
+          }
+          if (!sellerPhone) {
+            return toast.error('გთხოვთ მიუთითეთ საკონტაქტო ტელეფონი')
+          }
+          if (!sellerName) {
+            return toast.error('აუცილებელია მიუთითოთ თქვენი სახელი')
+          }
+          return console.log('testing')
           await uploadProduct(
             productTitle,
             productDesc,

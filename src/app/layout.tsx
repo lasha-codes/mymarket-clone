@@ -4,6 +4,7 @@ import './globals.css'
 import Provider from '@/provider/Provider'
 import { ClerkProvider } from '@clerk/nextjs'
 import { neobrutalism } from '@clerk/themes'
+import { Toaster } from 'sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,6 +26,7 @@ export default function RootLayout({
         }}
       >
         <Provider>
+          <Toaster theme={'light'} richColors />
           <body className={`${inter.className} overflow-x-hidden`}>
             {children}
           </body>
