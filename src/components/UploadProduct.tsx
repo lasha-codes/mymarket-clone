@@ -84,6 +84,11 @@ const UploadProduct = () => {
             selectedBill,
             selectedType
           )
+          toast.success('განცხადება გამოქვეყნდა')
+          window.location.href = '/'
+          setTimeout(() => {
+            window.location.reload()
+          }, 200)
         }}
         className='px-6 py-3 rounded-xl text-[15px] bg-mainYellow text-white font-semibold hover:opacity-80 transition-all ease-linear'
       >

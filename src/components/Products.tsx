@@ -19,11 +19,11 @@ const Products = () => {
   const { products } = useSelector((state: any) => state.product)
 
   return (
-    <>
+    <div className='flex items-start flex-wrap gap-6'>
       {products?.length !== 0 && Array.isArray(products)
         ? products.map((product: Product) => {
             return (
-              <div className='flex flex-col gap-3 items-start relative'>
+              <div className='flex flex-col w-fit gap-3 items-center relative'>
                 <div
                   onClick={() => router.push(`/products/${product.id}`)}
                   className='absolute cursor-pointer w-full h-full z-[10]'
@@ -69,7 +69,7 @@ const Products = () => {
             )
           })
         : ''}
-    </>
+    </div>
   )
 }
 

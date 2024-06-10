@@ -88,7 +88,7 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
     }
   }
   return (
-    <div className='bg-white rounded-xl p-5 max-[840px]:absolute max-[785px]:relative max-[785px]:bottom-[0px] max-[785px]:min-w-full max-[785px]:max-w-full max-[840px]:right-[20px] max-[785px]:right-0 max-[840px]:bottom-[76.5px] flex flex-col gap-3 border min-w-[300px] max-w-[350px] max-md:max-w-[320px] max-h-[200px]'>
+    <div className='bg-white rounded-xl p-5 max-[840px]:block max-[785px]:relative max-[785px]:bottom-[0px] max-[785px]:min-w-full max-[785px]:max-w-full max-[840px]:right-[20px] max-[785px]:right-0 max-[840px]:bottom-[76.5px] flex flex-col gap-3 border min-w-[300px] max-w-[350px] max-md:max-w-[320px] max-h-[200px]'>
       <ReturnPriceOffer />
     </div>
   )
