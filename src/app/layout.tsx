@@ -5,6 +5,7 @@ import Provider from '@/provider/Provider'
 import { ClerkProvider } from '@clerk/nextjs'
 import { neobrutalism } from '@clerk/themes'
 import { Toaster } from 'sonner'
+import ProductsProvider from '@/provider/ProductsProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,10 +27,12 @@ export default function RootLayout({
         }}
       >
         <Provider>
-          <Toaster theme={'light'} richColors />
-          <body className={`${inter.className} overflow-x-hidden`}>
-            {children}
-          </body>
+          <ProductsProvider>
+            <Toaster theme={'light'} richColors />
+            <body className={`${inter.className} overflow-x-hidden`}>
+              {children}
+            </body>
+          </ProductsProvider>
         </Provider>
       </ClerkProvider>
     </html>

@@ -8,6 +8,7 @@ export async function GET() {
     if (!products) {
       return NextResponse.json({ message: "Couldn't find any products" })
     }
+
     return NextResponse.json({ products })
   } catch (err: any) {
     return NextResponse.json({ message: err.message })
