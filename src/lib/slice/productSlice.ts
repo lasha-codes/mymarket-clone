@@ -1,6 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { Product } from '@prisma/client'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
+axios.defaults.baseURL = 'http://localhost:3000'
 
 type initialStateType = {
+  products: Product[]
+  productsLoading: boolean
   selectorOpened: boolean
   selectedTypeIndex: number
   selectedCategory: string | null
@@ -22,6 +27,8 @@ type initialStateType = {
 }
 
 const initialState: initialStateType = {
+  products: [],
+  productsLoading: false,
   selectorOpened: false,
   selectedTypeIndex: 0,
   selectedCategory: null,
@@ -41,6 +48,16 @@ const initialState: initialStateType = {
   sellerName: '',
   sellerPhone: '',
 }
+
+export const fetchProducts = createAsyncThunk('products/fetch', async () => {
+  try {
+    const { data } = await axios.get('/api/products')
+    console.log(data)
+    return data
+  } catch (err) {
+    console.log(err)
+  }
+})
 
 const productSlice = createSlice({
   name: 'product',
@@ -137,6 +154,18 @@ const productSlice = createSlice({
         state.sellerPhone = value as number
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchProducts.pending, (state) => {
+      state.productsLoading = true
+    }),
+      builder.addCase(fetchProducts.rejected, (state) => {
+        state.productsLoading = false
+      }),
+      builder.addCase(fetchProducts.fulfilled, (state, { payload }) => {
+        state.productsLoading = false
+        state.products = payload
+      })
   },
 })
 

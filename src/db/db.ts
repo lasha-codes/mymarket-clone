@@ -7,8 +7,8 @@ async function main() {
   return products
 }
 
-main().then((products: Product[]) => {
-  console.log(products)
-})
+// main().then((products: Product[]) => {
+// console.log(products)
+// })
 
 export default prisma

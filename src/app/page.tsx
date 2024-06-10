@@ -1,10 +1,13 @@
 import Header from '@/components/Header'
+import Products from '@/components/Products'
 
 const Home = () => {
   return (
-    <div>
+    <div className='w-full'>
       <Header />
-      <h1>Homepage</h1>
+      <div className='w-full flex justify-center'>
+        <Products />
+      </div>
     </div>
   )
 }
