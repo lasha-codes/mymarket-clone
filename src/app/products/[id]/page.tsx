@@ -22,8 +22,8 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
   }, [products])
 
   return (
-    <section className='w-full px-8 py-10 flex gap-10 justify-center max-[1200px]:flex-col'>
-      <div className='flex items-start justify-start gap-6 w-wit'>
+    <section className='w-full px-8 py-10 flex gap-10 justify-center relative max-[1200px]:flex-col max-[840px]:pb-10'>
+      <div className='flex items-start justify-start gap-6 max-[840px]:flex-col'>
         <ProductSlider
           condition={productById?.condition as string}
           images={productById?.images || []}
@@ -31,23 +31,34 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
             productById?.youtubeURL ? (productById.youtubeURL as string) : ''
           }
         />
-        <ProductInfo
-          productDescription={productById?.description as string}
-          productTitle={productById?.name as string}
-          id={productById?.id as string}
-          sellerLocation={productById?.location as string}
-          sellerName={productById?.contactName as string}
-          sellerPhone={productById?.contactNumber as number}
-          views={productById?.views as number}
-          updatedAt={productById?.updatedAt as Date}
-          productPrice={productById?.price as number}
+        <div className='flex items-center gap-5 relative'>
+          <ProductInfo
+            productDescription={productById?.description as string}
+            productTitle={productById?.name as string}
+            id={productById?.id as string}
+            sellerLocation={productById?.location as string}
+            sellerName={productById?.contactName as string}
+            sellerPhone={productById?.contactNumber as number}
+            views={productById?.views as number}
+            updatedAt={productById?.updatedAt as Date}
+            productPrice={productById?.price as number}
+          />
+          <div className='hidden max-[840px]:block max-[785px]:hidden'>
+            <Purchase
+              product={productById as Product}
+              priceOffers={productById?.priceDealType as string[]}
+              price={productById?.price as number}
+            />
+          </div>
+        </div>
+      </div>
+      <div className='max-[840px]:hidden max-[785px]:block'>
+        <Purchase
+          product={productById as Product}
+          priceOffers={productById?.priceDealType as string[]}
+          price={productById?.price as number}
         />
       </div>
-      <Purchase
-        product={productById as Product}
-        priceOffers={productById?.priceDealType as string[]}
-        price={productById?.price as number}
-      />
     </section>
   )
 }

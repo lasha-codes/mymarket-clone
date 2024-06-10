@@ -59,7 +59,7 @@ const ProductSlider = ({
       <div className='p-1.5 rounded-full bg-gray-200 absolute right-6 top-5 z-[10]'>
         <IoHeartOutline className='text-gray-400 text-[22px] cursor-pointer' />
       </div>
-      <Carousel className='w-[370px] h-[410px] max-xl:w-[320px] max-xl:h-[370px] rounded-2xl overflow-hidden border max-lg:w-[300px] max-lg:h-[355px] max-md:w-[270px] max-md:h-[330px]'>
+      <Carousel className='w-[370px] h-[410px] max-xl:w-[320px] max-xl:h-[370px] max-[840px]:min-w-[90vw] max-[840px]:mx-auto rounded-2xl overflow-hidden border max-lg:w-[300px] max-lg:h-[355px] max-md:w-[270px] max-md:h-[330px]'>
         <CarouselContent>
           {images &&
             images.map((URL, idx: number) => {
@@ -72,7 +72,7 @@ const ProductSlider = ({
                     src={URL}
                     key={idx}
                     fill
-                    className='object-cover'
+                    className='object-cover max-[840px]:object-contain'
                     alt={'product image' + '' + { idx }}
                   />
                 </CarouselItem>

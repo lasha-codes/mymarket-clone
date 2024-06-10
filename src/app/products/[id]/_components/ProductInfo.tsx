@@ -28,7 +28,7 @@ const ProductInfo = ({
   productPrice,
 }: ProductInfoProps) => {
   return (
-    <div className='max-w-fit flex flex-col gap-5'>
+    <div className='max-w-fit max-[840px]:max-w-screen max-[840px]:min-w-screen flex flex-col gap-5'>
       <div className='flex w-full items-center gap-6'>
         <h3 className='font-medium text-[14px]'>ID {id?.slice(0, 15)}...</h3>
         <div className='flex items-center gap-2 text-[14px] font-medium'>
@@ -40,10 +40,10 @@ const ProductInfo = ({
           <span>{updatedAt && format(updatedAt, 'dd/MM/yyyy HH:mm')}</span>
         </div>
       </div>
-      <h2 className='text-xl font-semibold max-w-[450px] border-b border-gray-300 pb-5'>
+      <h2 className='text-xl font-semibold border-gray-300 pb-5 border-b'>
         {productTitle && productTitle}
       </h2>
-      <div className='w-full flex items-center gap-2 border-b pb-5'>
+      <div className='w-full flex items-center gap-2 max-[840px]:flex-col max-[780px]:flex-row border-b pb-5 max-[840px]:items-start max-[840px]:gap-5'>
         <div className='flex flex-col items-start gap-2'>
           <div className='text-[12px] flex items-end gap-3 bg-gray-100 w-fit px-3 py-1 rounded-full font-medium'>
             <FaUserLarge className='mb-[3px]' />
@@ -72,6 +72,9 @@ const ProductInfo = ({
           </div>
         </div>
       </div>
+      <p className='text-black/90 text-[13px] max-w-[550px]'>
+        {productDescription && productDescription}
+      </p>
     </div>
   )
 }
