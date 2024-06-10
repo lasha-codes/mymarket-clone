@@ -30,6 +30,9 @@ model Product {
   userId        String
   bill          String?
   user          User     @relation(fields: [userId], references: [id])
+  createdAt     DateTime
+  updatedAt     DateTime @updatedAt
+  views         BigInt
 }
 
 model User {

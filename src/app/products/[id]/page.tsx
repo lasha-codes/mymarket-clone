@@ -3,6 +3,7 @@
 import { Product } from '@prisma/client'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import ProductSlider from './_components/ProductSlider'
 
 const ProductInspectPage = ({ params }: { params: { id: string } }) => {
   const dispatch = useDispatch()
@@ -15,10 +16,19 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
       products.find((product: Product) => {
         return product.id === params.id
       })
-    console.log(getProduct)
+    setProductById(getProduct)
   }, [products])
 
-  return <div>ProductInspectPage</div>
+  return (
+    <section className='w-full px-8 py-10'>
+      <ProductSlider
+        images={productById?.images || []}
+        youtubeURL={
+          productById?.youtubeURL ? (productById.youtubeURL as string) : ''
+        }
+      />
+    </section>
+  )
 }
 
 export default ProductInspectPage
