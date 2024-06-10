@@ -68,7 +68,7 @@ const UploadProduct = () => {
           if (!sellerName) {
             return toast.error('აუცილებელია მიუთითოთ თქვენი სახელი')
           }
-          return console.log('testing')
+
           await uploadProduct(
             productTitle,
             productDesc,
