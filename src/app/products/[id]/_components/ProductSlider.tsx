@@ -59,12 +59,15 @@ const ProductSlider = ({
       <div className='p-1.5 rounded-full bg-gray-200 absolute right-6 top-5 z-[10]'>
         <IoHeartOutline className='text-gray-400 text-[22px] cursor-pointer' />
       </div>
-      <Carousel className='w-[400px] h-[400px] rounded-2xl overflow-hidden border'>
+      <Carousel className='w-[370px] h-[410px] max-xl:w-[320px] max-xl:h-[370px] rounded-2xl overflow-hidden border max-lg:w-[300px] max-lg:h-[355px] max-md:w-[270px] max-md:h-[330px]'>
         <CarouselContent>
           {images &&
             images.map((URL, idx: number) => {
               return (
-                <CarouselItem key={idx} className='w-full h-[400px] relative'>
+                <CarouselItem
+                  key={idx}
+                  className='w-full h-[420px] max-xl:h-[370px] relative'
+                >
                   <Image
                     src={URL}
                     key={idx}

@@ -22,8 +22,8 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
   }, [products])
 
   return (
-    <section className='w-full px-8 py-10 flex items-start justify-between'>
-      <div className='flex items-start justify-between w-full gap-6'>
+    <section className='w-full px-8 py-10 flex gap-10 justify-center max-[1200px]:flex-col'>
+      <div className='flex items-start justify-start gap-6 w-wit'>
         <ProductSlider
           condition={productById?.condition as string}
           images={productById?.images || []}

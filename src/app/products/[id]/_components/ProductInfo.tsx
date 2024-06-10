@@ -1,6 +1,8 @@
-import { IoEyeOutline } from 'react-icons/io5'
+import { MdOutlineRemoveRedEye } from 'react-icons/md'
 import { LuClock4 } from 'react-icons/lu'
 import { format } from 'date-fns'
+import { FaUserLarge, FaPhone } from 'react-icons/fa6'
+import { MdOutlineMail } from 'react-icons/md'
 
 type ProductInfoProps = {
   id: string
@@ -26,16 +28,48 @@ const ProductInfo = ({
   productPrice,
 }: ProductInfoProps) => {
   return (
-    <div className='w-full flex flex-col gap-5'>
-      <div className='flex w-full items-center  gap-6'>
-        <h3 className='font-medium text-[14px]'>ID {id}</h3>
+    <div className='max-w-fit flex flex-col gap-5'>
+      <div className='flex w-full items-center gap-6'>
+        <h3 className='font-medium text-[14px]'>ID {id?.slice(0, 15)}...</h3>
         <div className='flex items-center gap-2 text-[14px] font-medium'>
-          <IoEyeOutline className='text-gray-400 text-[15px]' />
+          <MdOutlineRemoveRedEye className='text-gray-400 text-[16px]' />
           <span>{views} ნახვა</span>
         </div>
         <div className='flex items-center gap-2 text-[14px] font-medium'>
           <LuClock4 className='text-gray-400' />
           <span>{updatedAt && format(updatedAt, 'dd/MM/yyyy HH:mm')}</span>
+        </div>
+      </div>
+      <h2 className='text-xl font-semibold max-w-[450px] border-b border-gray-300 pb-5'>
+        {productTitle && productTitle}
+      </h2>
+      <div className='w-full flex items-center gap-2 border-b pb-5'>
+        <div className='flex flex-col items-start gap-2'>
+          <div className='text-[12px] flex items-end gap-3 bg-gray-100 w-fit px-3 py-1 rounded-full font-medium'>
+            <FaUserLarge className='mb-[3px]' />
+            <span>ფიზიკური პირი</span>
+          </div>
+          <div className='flex flex-col gap-0.5'>
+            <span className='text-[13px]'>{sellerName && sellerName}</span>
+            <span className='text-[13px] text-gray-400'>1 განცხადება</span>
+          </div>
+          <span className='text-[13.5px] font-medium'>
+            {sellerLocation && sellerLocation}
+          </span>
+        </div>
+        <div className='flex items-center gap-1.5'>
+          <div className='flex items-center gap-3 border border-blue-500 rounded-[9px] py-3.5 px-4'>
+            <FaPhone className='text-[#4CD964] text-[15px]' />
+            <span className='font-bold text-[15px]'>
+              {sellerPhone && sellerPhone}
+            </span>
+            <span className='text-blue-500 text-[11px] cursor-pointer'>
+              ნომრის ნახვა
+            </span>
+          </div>
+          <div className='border p-[19px] rounded-[8px] cursor-pointer'>
+            <MdOutlineMail className='text-sm' />
+          </div>
         </div>
       </div>
     </div>
