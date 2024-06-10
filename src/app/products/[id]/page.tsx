@@ -22,6 +22,7 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
   return (
     <section className='w-full px-8 py-10'>
       <ProductSlider
+        condition={productById?.condition as string}
         images={productById?.images || []}
         youtubeURL={
           productById?.youtubeURL ? (productById.youtubeURL as string) : ''
