@@ -43,7 +43,7 @@ const ProductInfo = ({
       <h2 className='text-xl font-semibold border-gray-300 pb-5 border-b'>
         {productTitle && productTitle}
       </h2>
-      <div className='w-full flex items-center gap-2 max-[840px]:flex-col max-[780px]:flex-row border-b pb-5 max-[840px]:items-start max-[840px]:gap-5'>
+      <div className='w-full flex items-center gap-2 max-[840px]:flex-col max-[780px]:flex-row max-[610px]:flex-col border-b pb-5 max-[840px]:items-start max-[840px]:gap-5'>
         <div className='flex flex-col items-start gap-2'>
           <div className='text-[12px] flex items-end gap-3 bg-gray-100 w-fit px-3 py-1 rounded-full font-medium'>
             <FaUserLarge className='mb-[3px]' />

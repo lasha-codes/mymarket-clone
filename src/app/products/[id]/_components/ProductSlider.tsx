@@ -10,6 +10,7 @@ import { TbReload } from 'react-icons/tb'
 import { VscSparkleFilled } from 'react-icons/vsc'
 import { BiSolidLike } from 'react-icons/bi'
 import { IoHeartOutline } from 'react-icons/io5'
+import ReactPlayer from 'react-player'
 
 type ProductSliderProps = {
   images: string[]
@@ -78,6 +79,11 @@ const ProductSlider = ({
                 </CarouselItem>
               )
             })}
+          {youtubeURL && (
+            <CarouselItem className='w-full h-[420px] max-xl:h-[370px] flex justify-center'>
+              <ReactPlayer url={youtubeURL} height={420} />
+            </CarouselItem>
+          )}
         </CarouselContent>
         <CarouselNext className='absolute right-3 h-[45px] w-[45px] bg-gray-200 hover:bg-gray-300 transition-all' />
         <CarouselPrevious className='absolute left-3 w-[45px] h-[45px] bg-gray-200 hover:bg-gray-200 transition-all' />

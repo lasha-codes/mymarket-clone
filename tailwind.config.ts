@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        midLg: '840px',
+      },
       colors: {
         mainYellow: '#FECF1A',
         border: 'hsl(var(--border))',
