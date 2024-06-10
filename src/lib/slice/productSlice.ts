@@ -52,8 +52,7 @@ const initialState: initialStateType = {
 export const fetchProducts = createAsyncThunk('products/fetch', async () => {
   try {
     const { data } = await axios.get('/api/products')
-    console.log(data)
-    return data
+    return data.products
   } catch (err) {
     console.log(err)
   }
