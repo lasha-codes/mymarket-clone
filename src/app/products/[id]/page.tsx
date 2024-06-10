@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import ProductSlider from './_components/ProductSlider'
 import ProductInfo from './_components/ProductInfo'
 import Purchase from './_components/Purchase'
+import ProductMapLocation from './_components/ProductMapLocation'
 
 const ProductInspectPage = ({ params }: { params: { id: string } }) => {
   const dispatch = useDispatch()
@@ -59,6 +60,7 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
           price={productById?.price as number}
         />
       </div>
+      <ProductMapLocation location={productById?.location as string} />
     </section>
   )
 }
