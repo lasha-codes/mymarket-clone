@@ -11,7 +11,7 @@ const StripePurchasePage = async ({ params }: { params: { id: string } }) => {
     productId
   )
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: purchaseProduct.product.price,
+    amount: purchaseProduct.product.price * 100,
     currency: purchaseProduct.product.bill === 'ლარი' ? 'gel' : 'usd',
     description: purchaseProduct.product.description,
     metadata: {

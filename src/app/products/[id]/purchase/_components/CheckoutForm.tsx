@@ -82,11 +82,29 @@ function Form({
   purchasePrice: number
   bill: string
 }) {
+  const [paymentPending, setPaymentPending] = useState<boolean>(false)
   const elements = useElements()
   const stripe = useStripe()
+
+  const handlePurchase = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!stripe || !elements) {
+      return
+    }
+
+    setPaymentPending(true)
+
+    try {
+    } catch (err) {
+      console.log(err)
+      setPaymentPending(false)
+    }
+  }
+
   return (
     <form
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={handlePurchase}
       className='w-full flex flex-col justify-center gap-5'
     >
       <h3 className='flex items-center gap-1 text-xl font-semibold'>
@@ -95,7 +113,7 @@ function Form({
       </h3>
       <PaymentElement />
       <button className='mx-auto bg-[#635BFF] text-white px-20 rounded-lg py-2 hover:opacity-80 transition-all duration-300 ease-linear'>
-        გადახდა
+        {paymentPending ? 'მუშავდება...' : 'გადახდა'}
       </button>
     </form>
   )
