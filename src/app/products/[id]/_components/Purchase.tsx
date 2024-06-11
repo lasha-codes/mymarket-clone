@@ -1,6 +1,7 @@
 import { Product } from '@prisma/client'
 import { FiDollarSign } from 'react-icons/fi'
 import { FaLariSign, FaStripe } from 'react-icons/fa6'
+import Link from 'next/link'
 
 type PurchaseProps = {
   priceOffers: string[]
@@ -21,14 +22,17 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
             )}
             ფასი შეთავაზებით
           </span>
-          <button className='py-1 relative rounded-[10px] overflow-hidden group w-full flex items-center justify-center bg-white shadow-lg active:shadow-none transition-all hover:shadow-xl duration-200 ease-linear gap-2'>
+          <Link
+            href={`/products/${product?.id}/purchase`}
+            className='py-1 relative rounded-[10px] overflow-hidden group w-full flex items-center justify-center bg-white shadow-lg active:shadow-none transition-all hover:shadow-xl duration-200 ease-linear gap-2'
+          >
             <FaStripe className='text-4xl text-[#635BFF] group-hover:text-white z-[10] transition-all duration-200 ease-linear' />
             <div className='h-[16px] w-[1px] bg-[#635BFF] group-hover:bg-white transition-all ease-linear z-[10]' />
             <span className='font-medium z-[10] transition-all ease-linear group-hover:text-white'>
               გადახდა
             </span>
             <div className='absolute w-0 h-full opacity-0 bg-[#635BFF] group-hover:w-full transition-all duration-500 ease-out rounded-[10px] group-hover:opacity-100' />
-          </button>
+          </Link>
           <button className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'>
             შეთავაზე ფასი
           </button>
@@ -48,14 +52,17 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
             )}
             {price}
           </span>
-          <button className='py-1 relative rounded-[10px] overflow-hidden group w-full flex items-center justify-center bg-white shadow-lg active:shadow-none transition-all hover:shadow-xl duration-200 ease-linear gap-2'>
+          <Link
+            href={`/products/${product?.id}/purchase`}
+            className='py-1 relative rounded-[10px] overflow-hidden group w-full flex items-center justify-center bg-white shadow-lg active:shadow-none transition-all hover:shadow-xl duration-200 ease-linear gap-2'
+          >
             <FaStripe className='text-4xl text-[#635BFF] group-hover:text-white z-[10] transition-all duration-200 ease-linear' />
             <div className='h-[16px] w-[1px] bg-[#635BFF] group-hover:bg-white transition-all ease-linear z-[10]' />
             <span className='font-medium z-[10] transition-all ease-linear group-hover:text-white'>
               გადახდა
             </span>
             <div className='absolute w-0 h-full opacity-0 bg-[#635BFF] group-hover:w-full transition-all duration-500 ease-out rounded-[10px] group-hover:opacity-100' />
-          </button>
+          </Link>
           <button className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'>
             შეთავაზე ფასი
           </button>
@@ -72,14 +79,17 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
             )}
             {price}
           </span>
-          <button className='py-1 relative rounded-[10px] overflow-hidden group w-full flex items-center justify-center bg-white shadow-lg active:shadow-none transition-all hover:shadow-xl duration-200 ease-linear gap-2'>
+          <Link
+            href={`/products/${product?.id}/purchase`}
+            className='py-1 relative rounded-[10px] overflow-hidden group w-full flex items-center justify-center bg-white shadow-lg active:shadow-none transition-all hover:shadow-xl duration-200 ease-linear gap-2'
+          >
             <FaStripe className='text-4xl text-[#635BFF] group-hover:text-white z-[10] transition-all duration-200 ease-linear' />
             <div className='h-[16px] w-[1px] bg-[#635BFF] group-hover:bg-white transition-all ease-linear z-[10]' />
             <span className='font-medium z-[10] transition-all ease-linear group-hover:text-white'>
               გადახდა
             </span>
             <div className='absolute w-0 h-full opacity-0 bg-[#635BFF] group-hover:w-full transition-all duration-500 ease-out rounded-[10px] group-hover:opacity-100' />
-          </button>
+          </Link>
           <button className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'>
             შეთავაზე ფასი
           </button>

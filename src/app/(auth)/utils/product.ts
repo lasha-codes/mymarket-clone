@@ -1,4 +1,5 @@
 import axios from 'axios'
+axios.defaults.baseURL = 'http://localhost:3000'
 
 export const uploadProduct = async (
   productTitle: string,
@@ -34,6 +35,15 @@ export const uploadProduct = async (
     })
 
     console.log(data)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const getProductByIdPurchase = async (productId: string) => {
+  try {
+    const response = await axios.post(`/api/productById`, { productId })
+    return response.data
   } catch (err) {
     console.log(err)
   }
