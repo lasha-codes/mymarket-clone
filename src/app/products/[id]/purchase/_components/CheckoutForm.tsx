@@ -1,5 +1,9 @@
 'use client'
-import { PaymentElement, Elements } from '@stripe/react-stripe-js'
+import {
+  ExpressCheckoutElement,
+  PaymentElement,
+  Elements,
+} from '@stripe/react-stripe-js'
 import { useStripe, useElements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import { Product } from '@prisma/client'
@@ -16,6 +20,7 @@ import {
 import ProductPurchaseInfo from './ProductPurchaseInfo'
 import ReactPlayer from 'react-player'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -94,8 +99,20 @@ function Form({
     }
 
     setPaymentPending(true)
-
     try {
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: 'http://localhost:3000',
+        },
+      })
+
+      if (error) {
+        setPaymentPending(false)
+        return toast.error(error.message)
+      }
+
+      setPaymentPending(false)
     } catch (err) {
       console.log(err)
       setPaymentPending(false)
@@ -111,8 +128,13 @@ function Form({
         {bill === 'ლარი' ? <FaLariSign /> : <LuDollarSign />}{' '}
         <span>{purchasePrice}</span>
       </h3>
+      <ExpressCheckoutElement
+        onConfirm={() => {
+          console.log('')
+        }}
+      />
       <PaymentElement />
-      <button className='mx-auto bg-[#635BFF] text-white px-20 rounded-lg py-2 hover:opacity-80 transition-all duration-300 ease-linear'>
+      <button className='rounded-lg px-20 py-3 bg-[#9966FF] hover:bg-[#8146f7] transition-all duration-300 ease-linear text-white font-medium'>
         {paymentPending ? 'მუშავდება...' : 'გადახდა'}
       </button>
     </form>
