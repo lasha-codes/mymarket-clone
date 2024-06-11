@@ -10,7 +10,7 @@ type PurchaseProps = {
 
 const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
   const ReturnPriceOffer = () => {
-    if (priceOffers?.includes('ფასის შეთავაზებით')) {
+    if (priceOffers?.includes('ფასი შეთავაზებით')) {
       return (
         <div className='flex flex-col gap-3 w-fit'>
           <span className='flex items-center gap-1 text-xl font-semibold'>

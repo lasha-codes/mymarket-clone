@@ -54,7 +54,7 @@ const UploadProduct = () => {
             return toast.error('აღწერა სავალდებულოა')
           }
           if (
-            selectedPriceOffers.includes('ფასი შეთავაზებით') &&
+            !selectedPriceOffers.includes('ფასი შეთავაზებით') &&
             !productPrice
           ) {
             return toast.error('ფასის მითითება სავალდებულოა')
@@ -85,10 +85,10 @@ const UploadProduct = () => {
             selectedType
           )
           toast.success('განცხადება გამოქვეყნდა')
-          window.location.href = '/'
           setTimeout(() => {
             window.location.reload()
-          }, 200)
+          }, 400)
+          window.location.href = '/'
         }}
         className='px-6 py-3 rounded-xl text-[15px] bg-mainYellow text-white font-semibold hover:opacity-80 transition-all ease-linear'
       >
