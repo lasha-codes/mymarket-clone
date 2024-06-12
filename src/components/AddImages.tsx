@@ -6,6 +6,8 @@ import { removeImage, changeInputsVal } from '@/lib/slice/productSlice'
 import { BsYoutube } from 'react-icons/bs'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import Image from 'next/image'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 const AddImages = () => {
   const dispatch = useDispatch()
@@ -14,7 +16,13 @@ const AddImages = () => {
   )
   const [imageURL, setImageURL] = useState<string>('')
 
-  console.log(productImages)
+  useEffect(() => {
+    axios
+      .post('http://localhost:3000/api/handle-purchase', { name: 'lasha' })
+      .then((user) => {
+        console.log(user)
+      })
+  }, [])
 
   return (
     <div
