@@ -45,12 +45,13 @@ model Orders {
 }
 
 model Messages {
-  id        String @id @default(uuid())
+  id        String  @id @default(uuid())
   type      String
   message   String
   recipient String
-  user      User   @relation(fields: [userId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
   userId    String
+  read      String?
 }
 
 model User {
