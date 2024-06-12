@@ -21,6 +21,7 @@ import ProductPurchaseInfo from './ProductPurchaseInfo'
 import ReactPlayer from 'react-player'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
+import axios from 'axios'
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -70,6 +71,7 @@ const CheckoutForm = ({
         }}
       >
         <Form
+          purchaseProduct={purchaseProduct}
           purchasePrice={purchaseProduct.price}
           bill={purchaseProduct.bill as string}
         />
@@ -83,13 +85,36 @@ export default CheckoutForm
 function Form({
   purchasePrice,
   bill,
+  purchaseProduct,
 }: {
   purchasePrice: number
   bill: string
+  purchaseProduct: Product
 }) {
   const [paymentPending, setPaymentPending] = useState<boolean>(false)
   const elements = useElements()
   const stripe = useStripe()
+
+  axios.defaults.baseURL = 'http://localhost:3000'
+  const handleAfterPurchase = async () => {
+    try {
+      if (!purchaseProduct?.id) {
+        return toast.error('We need to load the product first please try again')
+      }
+
+      const { data }: { data: { message?: string } } = await axios.post(
+        '/api/handle-purchase',
+        {
+          id: purchaseProduct.id,
+        }
+      )
+      if (data.message) {
+        return toast.error(data.message)
+      }
+    } catch (err: any) {
+      toast.error(err.message)
+    }
+  }
 
   const handlePurchase = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -100,6 +125,7 @@ function Form({
 
     setPaymentPending(true)
     try {
+      await handleAfterPurchase()
       const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
