@@ -13,12 +13,6 @@ export async function POST(request: Request) {
       }),
     ])
 
-    if (!purchasedProduct) {
-      return NextResponse.json({
-        message: 'We could not find the purchased product',
-      })
-    }
-
     if (!loggedUser) {
       return NextResponse.json({ message: 'We could not read the user' })
     }
@@ -27,7 +21,56 @@ export async function POST(request: Request) {
       where: { email: loggedUser?.emailAddresses[0].emailAddress },
     })
 
-    return NextResponse.json({ buyer })
+    if (!purchasedProduct) {
+      return NextResponse.json({
+        message: 'We could not find the purchased product',
+      })
+    }
+
+    const productSeller = await prisma.user.findUnique({
+      where: {
+        id: purchasedProduct.userId,
+      },
+    })
+
+    if (!productSeller) {
+      return NextResponse.json({
+        message: 'We could not identify the seller of the product',
+      })
+    }
+
+    const createdOrder = await prisma.orders.create({
+      data: {
+        user: {
+          connect: {
+            id: buyer?.id,
+          },
+        },
+        product: {
+          connect: {
+            id: purchasedProduct.id,
+          },
+        },
+      },
+    })
+
+    const createdMessage = await prisma.messages.create({
+      data: {
+        user: {
+          connect: {
+            id: buyer?.id,
+          },
+        },
+        recipient: productSeller.id,
+        message: `${buyer?.email} with the id of ${buyer?.id} has purchased the product ${purchasedProduct.name} with the id of ${purchasedProduct.id}`,
+        type: 'Purchase',
+      },
+    })
+
+    return NextResponse.json({
+      createdOrder,
+      createdMessage,
+    })
   } catch (err: any) {
     return NextResponse.json({ message: err.message })
   }

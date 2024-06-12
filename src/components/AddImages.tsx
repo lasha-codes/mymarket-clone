@@ -18,7 +18,9 @@ const AddImages = () => {
 
   useEffect(() => {
     axios
-      .post('http://localhost:3000/api/handle-purchase', { name: 'lasha' })
+      .post('http://localhost:3000/api/handle-purchase', {
+        id: 'fa878913-c353-42c0-a972-63ebd6edd8d7',
+      })
       .then((user) => {
         console.log(user)
       })
