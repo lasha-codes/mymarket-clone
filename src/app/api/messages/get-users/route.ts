@@ -1,23 +1,13 @@
 import prisma from '@/db/db'
 import { NextResponse } from 'next/server'
 
-export async function POST(request: Request) {
+export async function GET(request: Request) {
   try {
-    const { recipientId, senderId }: { recipientId: string; senderId: string } =
-      await request.json()
-
-    const sender = await prisma.user.findUnique({
-      where: { id: senderId },
-    })
-    const recipient = await prisma.user.findUnique({
-      where: { id: recipientId },
-    })
-
-    if (!sender || !recipient) {
-      return NextResponse.json({ message: 'We could not find the users' })
+    const users = await prisma.user.findMany()
+    if (!users) {
+      return NextResponse.json({ message: 'We have no users' })
     }
-
-    return NextResponse.json({ users: { sender, recipient } })
+    return NextResponse.json({ users })
   } catch (err: any) {
     return NextResponse.json({ message: err.message })
   }
