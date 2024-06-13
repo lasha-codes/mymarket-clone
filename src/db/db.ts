@@ -10,8 +10,8 @@ const main = async () => {
   return { orders, messages }
 }
 
-main().then((messages_orders) => {
-  console.log(messages_orders)
-})
+// main().then((messages_orders) => {
+// console.log(messages_orders)
+// })
 
 export default prisma
