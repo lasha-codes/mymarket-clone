@@ -37,21 +37,23 @@ model Product {
 }
 
 model Orders {
-  id        String  @id @default(uuid())
-  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id @default(uuid())
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   productId String
   userId    String
+  createdAt DateTime @default(now())
 }
 
 model Messages {
-  id        String  @id @default(uuid())
+  id        String   @id @default(uuid())
   type      String
   message   String
   recipient String
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   read      String?
+  createdAt DateTime @default(now())
 }
 
 model User {

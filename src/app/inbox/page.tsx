@@ -10,7 +10,13 @@ const InboxPage = () => {
     <div>
       {messages?.sent_messages &&
         messages.sent_messages.map((message: Messages) => {
-          return <Message sent_message={message} users={users.users} />
+          return (
+            <Message
+              key={message.id}
+              sent_message={message}
+              users={users.users}
+            />
+          )
         })}
     </div>
   )
