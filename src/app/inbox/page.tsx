@@ -15,6 +15,18 @@ const InboxPage = () => {
               key={message.id}
               sent_message={message}
               users={users.users}
+              type='sent'
+            />
+          )
+        })}
+      {messages?.received_messages &&
+        messages.received_messages.map((message: Messages) => {
+          return (
+            <Message
+              key={message.id}
+              received_message={message}
+              users={users.users}
+              type='received'
             />
           )
         })}
