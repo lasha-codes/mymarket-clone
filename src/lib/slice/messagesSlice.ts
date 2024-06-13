@@ -55,15 +55,14 @@ const messages = createSlice({
         state.messagesLoading = false
       })
     builder.addCase(fetchUsers.pending, (state) => {
-      state.messagesLoading = true
+      state.usersLoading = true
     }),
       builder.addCase(fetchUsers.rejected, (state) => {
-        state.messagesLoading = false
+        state.usersLoading = false
       }),
       builder.addCase(fetchUsers.fulfilled, (state, { payload }) => {
-        state.messages = payload
-        state.messagesLoading = false
-        console.log(state.messages)
+        state.users = payload
+        state.usersLoading = false
       })
   },
 })
