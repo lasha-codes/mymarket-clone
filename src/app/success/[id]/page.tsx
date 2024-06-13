@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { Product } from '@prisma/client'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Link from 'next/link'
 
 axios.defaults.baseURL = 'http://localhost:3000'
@@ -41,6 +41,7 @@ const PurchaseSuccessPage = ({
       if (data.message) {
         return toast.error(data.message)
       }
+      console.log(data)
     } catch (err: any) {
       toast.error(err.message)
     }

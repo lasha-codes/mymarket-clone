@@ -39,6 +39,20 @@ export async function POST(request: Request) {
       })
     }
 
+    const specificOrderExists = await prisma.orders.findFirst({
+      where: {
+        userId: buyer?.id,
+        productId: purchasedProduct.id,
+      },
+    })
+
+    if (specificOrderExists) {
+      return NextResponse.json({
+        order: specificOrderExists,
+        message: 'This specific order already exists',
+      })
+    }
+
     const createdOrder = await prisma.orders.create({
       data: {
         user: {
