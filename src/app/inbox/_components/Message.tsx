@@ -48,7 +48,7 @@ const Message = ({
   const ReturnSentMessageComponent = () => {
     if (sent_message && sent_message.type === 'Purchase') {
       return (
-        <div className='bg-white shadow-md rounded-2xl transition-all duration-300 ease-linear px-5 py-3 flex flex-col gap-3 items-start max-w-[500px]'>
+        <div className='bg-blue-200 shadow-md rounded-2xl transition-all duration-300 ease-linear px-5 py-3 flex flex-col gap-3 items-start max-w-[500px]'>
           <div className='flex items-center gap-3 transition-all duration-300 ease-linear'>
             <div className='relative rounded-full transition-all duration-300 ease-linear overflow-hidden w-[30px] h-[30px]'>
               <Image
@@ -75,7 +75,7 @@ const Message = ({
 
             <button
               onClick={() => setShowMessage(!showMessage)}
-              className='text-sm text-blue-600 font-medium'
+              className='text-sm text-white font-medium'
             >
               {showMessage ? 'hide' : 'show'}
             </button>
@@ -114,7 +114,7 @@ const Message = ({
             </p>
             <button
               onClick={() => setShowMessage(!showMessage)}
-              className='text-sm text-blue-600 font-medium'
+              className={`text-sm text-blue-500 font-medium`}
             >
               {showMessage ? 'hide' : 'show'}
             </button>
