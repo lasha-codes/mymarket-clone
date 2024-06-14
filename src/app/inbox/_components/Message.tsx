@@ -7,6 +7,8 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { FaLink } from 'react-icons/fa6'
 import { FaYoutube } from 'react-icons/fa'
+import { FaLariSign } from 'react-icons/fa6'
+import { FiDollarSign } from 'react-icons/fi'
 
 const getUsers = (users: User[], recipientId: string, senderId: string) => {
   const sender = users.find((user) => {
@@ -150,12 +152,25 @@ const Message = ({
                   </div>
                 )}
                 {productById && (
-                  <Link
-                    href={`/products/${productById?.id}`}
-                    className='text-[15px] text-black/90'
-                  >
-                    მონახულება
-                  </Link>
+                  <div className='w-full flex items-center justify-between'>
+                    <Link
+                      href={`/products/${productById?.id}`}
+                      className='text-[15px] text-black/90'
+                    >
+                      მონახულება
+                    </Link>
+                    <div className='flex items-center gap-1.5'>
+                      <span className='text-black/70'>შემოთავაზება: </span>
+                      <div className='flex items-center gap-0.5 font-semibold'>
+                        {productById.bill === 'ლარი' ? (
+                          <FaLariSign />
+                        ) : (
+                          <FiDollarSign />
+                        )}
+                        <span>{sent_message.offerPrice}</span>
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -272,8 +287,7 @@ const Message = ({
                     </div>
                     <a
                       href={productById.youtubeURL}
-                      className='flex items-center gap-1 text-[13px] text-blue-600 
-     hover:text-blue-700 transition-all'
+                      className='flex items-center gap-1 text-[13px] text-blue-600 hover:text-blue-700 transition-all'
                       target='_blank'
                     >
                       <FaLink />
@@ -282,12 +296,25 @@ const Message = ({
                   </div>
                 )}
                 {productById && (
-                  <Link
-                    href={`/products/${productById?.id}`}
-                    className='text-[15px] text-black/90'
-                  >
-                    მონახულება
-                  </Link>
+                  <div className='w-full flex items-center justify-between'>
+                    <Link
+                      href={`/products/${productById?.id}`}
+                      className='text-[15px] text-black/90'
+                    >
+                      მონახულება
+                    </Link>
+                    <div className='flex items-center gap-1.5'>
+                      <span className='text-black/70'>შემოთავაზება: </span>
+                      <div className='flex items-center gap-0.5 font-semibold'>
+                        {productById.bill === 'ლარი' ? (
+                          <FaLariSign />
+                        ) : (
+                          <FiDollarSign />
+                        )}
+                        <span>{received_message.offerPrice}</span>
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
