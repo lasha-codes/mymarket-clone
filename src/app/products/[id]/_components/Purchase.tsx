@@ -1,7 +1,10 @@
+'use client'
+
 import { Product } from '@prisma/client'
 import { FiDollarSign } from 'react-icons/fi'
 import { FaLariSign, FaStripe } from 'react-icons/fa6'
 import Link from 'next/link'
+import { toast } from 'sonner'
 
 type PurchaseProps = {
   priceOffers: string[]
@@ -13,17 +16,12 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
   const ReturnPriceOffer = () => {
     if (priceOffers?.includes('ფასი შეთავაზებით')) {
       return (
-        <div className='flex flex-col gap-3 w-fit'>
+        <div className='flex flex-col gap-3 w-full'>
           <span className='flex items-center gap-1 text-xl font-semibold'>
-            {product?.bill && product.bill === 'ლარი' ? (
-              <FaLariSign />
-            ) : (
-              <FiDollarSign />
-            )}
-            ფასი შეთავაზებით
+            ფასი შეთანხმებით
           </span>
-          <Link
-            href={`/products/${product?.id}/purchase`}
+          <div
+            onClick={() => toast.error('გთხოვთ ჯერ შეთანხმდით ფასზე')}
             className='py-1 relative rounded-[10px] overflow-hidden group w-full flex items-center justify-center bg-white shadow-lg active:shadow-none transition-all hover:shadow-xl duration-200 ease-linear gap-2'
           >
             <FaStripe className='text-4xl text-[#635BFF] group-hover:text-white z-[10] transition-all duration-200 ease-linear' />
@@ -32,7 +30,7 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
               გადახდა
             </span>
             <div className='absolute w-0 h-full opacity-0 bg-[#635BFF] group-hover:w-full transition-all duration-500 ease-out rounded-[10px] group-hover:opacity-100' />
-          </Link>
+          </div>
           <button className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'>
             შეთავაზე ფასი
           </button>

@@ -62,11 +62,18 @@ const Products = () => {
                         ? 'ფასი შეთავაზებით'
                         : product.price.toFixed(2)}
                     </span>
-                    {product.bill === 'ლარი' ? (
-                      <FaLariSign />
-                    ) : (
-                      <FaDollarSign />
-                    )}
+                    <div
+                      className={`${
+                        product.priceDealType.includes('ფასი შეთავაზებით') &&
+                        'hidden'
+                      }`}
+                    >
+                      {product.bill === 'ლარი' ? (
+                        <FaLariSign />
+                      ) : (
+                        <FaDollarSign />
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

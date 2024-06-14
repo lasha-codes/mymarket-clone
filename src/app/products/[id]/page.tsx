@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import ProductSlider from './_components/ProductSlider'
 import ProductInfo from './_components/ProductInfo'
 import Purchase from './_components/Purchase'
+import OfferPrice from './_components/OfferPrice'
 
 const ProductInspectPage = ({ params }: { params: { id: string } }) => {
   const dispatch = useDispatch()
@@ -58,6 +59,9 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
           priceOffers={productById?.priceDealType as string[]}
           price={productById?.price as number}
         />
+      </div>
+      <div className='absolute top-1/2 left-1/2 z-[99] -translate-x-1/2 -translate-y-1/3'>
+        <OfferPrice price={200} bill='' />
       </div>
     </section>
   )

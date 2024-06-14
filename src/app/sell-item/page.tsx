@@ -6,6 +6,7 @@ import ProductInfo from '@/components/ProductInfo'
 import SelectPrice from '@/components/SelectPrice'
 import ContactInformation from '@/components/ContactInformation'
 import UploadProduct from '@/components/UploadProduct'
+import Header from '@/components/Header'
 
 export const productTypes = [
   'სახლი და ბაღი',
@@ -62,9 +63,10 @@ export const popularCities = [
 
 const SellItemPage = () => {
   return (
-    <>
-      <main className='w-screen flex justify-center bg-gray-100 py-10 overflow-y-scroll'>
-        <div className='flex flex-col w-[700px] gap-4 lg:w-[850px] xl:w-[1000px] 2xl:w-[1150px]'>
+    <div className='bg-gray-100'>
+      <Header />
+      <main className='w-screen flex justify-center py-10 px-[200px] max-2xl:px-[150px] max-lg:px-[80px] max-md:px-[35px] max-sm:px-[20px] overflow-y-scroll'>
+        <div className='flex flex-col gap-4 w-full'>
           <div className='w-full flex items-start flex-col gap-7'>
             <h2 className='text-[27px] font-semibold'>განცხადების დამატება</h2>
             <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
@@ -95,7 +97,7 @@ const SellItemPage = () => {
           <UploadProduct />
         </div>
       </main>
-    </>
+    </div>
   )
 }
 
