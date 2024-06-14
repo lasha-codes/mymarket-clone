@@ -3,12 +3,17 @@
 import { IoCloseOutline } from 'react-icons/io5'
 import { FiDollarSign } from 'react-icons/fi'
 import { FaLariSign } from 'react-icons/fa6'
+import { useDispatch } from 'react-redux'
+import { toggleOfferPriceOpen } from '@/lib/slice/productSlice'
 
 const OfferPrice = ({ price, bill }: { price: number; bill: string }) => {
+  const dispatch = useDispatch()
   return (
     <div className='py-10 shadow-xl px-5 bg-white relative rounded-2xl flex flex-col items-center w-[450px] gap-4'>
       <button className='absolute right-6 top-7 p-2 bg-gray-100 hover:bg-gray-200 transition-all duration-200 ease-linear rounded-full'>
-        <IoCloseOutline />
+        <IoCloseOutline
+          onClick={() => dispatch(toggleOfferPriceOpen({ bool: false }))}
+        />
       </button>
       <div className='flex flex-col items-center gap-1 w-full'>
         <h2 className='text-2xl font-semibold'>შეთავაზე ფასი</h2>

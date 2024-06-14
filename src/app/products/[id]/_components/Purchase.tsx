@@ -5,6 +5,8 @@ import { FiDollarSign } from 'react-icons/fi'
 import { FaLariSign, FaStripe } from 'react-icons/fa6'
 import Link from 'next/link'
 import { toast } from 'sonner'
+import { useDispatch } from 'react-redux'
+import { toggleOfferPriceOpen } from '@/lib/slice/productSlice'
 
 type PurchaseProps = {
   priceOffers: string[]
@@ -13,6 +15,7 @@ type PurchaseProps = {
 }
 
 const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
+  const dispatch = useDispatch()
   const ReturnPriceOffer = () => {
     if (priceOffers?.includes('ფასი შეთავაზებით')) {
       return (
@@ -31,7 +34,10 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
             </span>
             <div className='absolute w-0 h-full opacity-0 bg-[#635BFF] group-hover:w-full transition-all duration-500 ease-out rounded-[10px] group-hover:opacity-100' />
           </div>
-          <button className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'>
+          <button
+            onClick={() => dispatch(toggleOfferPriceOpen({ bool: true }))}
+            className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'
+          >
             შეთავაზე ფასი
           </button>
         </div>
@@ -61,7 +67,10 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
             </span>
             <div className='absolute w-0 h-full opacity-0 bg-[#635BFF] group-hover:w-full transition-all duration-500 ease-out rounded-[10px] group-hover:opacity-100' />
           </Link>
-          <button className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'>
+          <button
+            onClick={() => dispatch(toggleOfferPriceOpen({ bool: true }))}
+            className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'
+          >
             შეთავაზე ფასი
           </button>
         </div>
@@ -88,7 +97,10 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
             </span>
             <div className='absolute w-0 h-full opacity-0 bg-[#635BFF] group-hover:w-full transition-all duration-500 ease-out rounded-[10px] group-hover:opacity-100' />
           </Link>
-          <button className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'>
+          <button
+            onClick={() => dispatch(toggleOfferPriceOpen({ bool: true }))}
+            className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'
+          >
             შეთავაზე ფასი
           </button>
         </div>
