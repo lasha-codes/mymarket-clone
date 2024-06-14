@@ -61,7 +61,10 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
         />
       </div>
       <div className='absolute top-1/2 left-1/2 z-[99] -translate-x-1/2 -translate-y-1/3'>
-        <OfferPrice price={200} bill='' />
+        <OfferPrice
+          price={productById?.price as number}
+          bill={productById?.bill as string}
+        />
       </div>
     </section>
   )

@@ -24,6 +24,7 @@ type initialStateType = {
   productPrice: number | string
   sellerName: string
   sellerPhone: number | string
+  offerPriceOpen: boolean
 }
 
 const initialState: initialStateType = {
@@ -47,6 +48,7 @@ const initialState: initialStateType = {
   productPrice: '',
   sellerName: '',
   sellerPhone: '',
+  offerPriceOpen: false,
 }
 
 export const fetchProducts = createAsyncThunk('products/fetch', async () => {
@@ -153,6 +155,10 @@ const productSlice = createSlice({
         state.sellerPhone = value as number
       }
     },
+    toggleOfferPriceOpen: (state, { payload }) => {
+      const { bool }: { bool: boolean } = payload
+      state.offerPriceOpen = bool
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
@@ -187,4 +193,5 @@ export const {
   changeSearchVal,
   changeCategoryVal,
   changeInputsVal,
+  toggleOfferPriceOpen,
 } = productSlice.actions
