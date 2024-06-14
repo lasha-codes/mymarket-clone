@@ -31,7 +31,7 @@ const Header = () => {
             fill
           />
         </Link>
-        <nav className='flex items-center gap-8'>
+        <nav suppressHydrationWarning className='flex items-center gap-8'>
           <Link
             href='/sell-item'
             className='bg-[#FFF4CC] flex hover:bg-[#FFEFB2] cursor-pointer transition-all ease-linear items-center h-[42px] w-[130px] justify-center rounded-xl gap-2'

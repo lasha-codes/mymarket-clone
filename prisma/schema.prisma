@@ -46,14 +46,15 @@ model Orders {
 }
 
 model Messages {
-  id        String   @id @default(uuid())
-  type      String
-  message   String
-  recipient String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
-  read      String?
-  createdAt DateTime @default(now())
+  id         String   @id @default(uuid())
+  type       String
+  message    String
+  recipient  String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  read       String?
+  offerPrice Int?
+  createdAt  DateTime @default(now())
 }
 
 model User {

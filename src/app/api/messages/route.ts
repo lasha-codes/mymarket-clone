@@ -44,3 +44,36 @@ export async function GET(request: Request) {
     return NextResponse.json({ message: err.message })
   }
 }
+
+export async function POST(request: Request) {
+  try {
+    const [data, signedUser] = await Promise.all([
+      request.json(),
+      currentUser(),
+    ])
+    const { type, offeredPrice, sellerId, optionalMessage } = data
+    const sender = await prisma.user.findUnique({
+      where: { email: signedUser?.emailAddresses[0].emailAddress },
+    })
+    if (!sender) {
+      return NextResponse.json({ message: 'We could not identify the sender' })
+    }
+    const createdMessage = prisma.messages.create({
+      data: {
+        message: optionalMessage || '',
+        recipient: sellerId,
+        user: {
+          connect: {
+            id: sender.id,
+          },
+        },
+        type: type,
+        offerPrice: offeredPrice,
+      },
+    })
+
+    return NextResponse.json({ createdMessage })
+  } catch (err: any) {
+    return NextResponse.json({ message: err.message })
+  }
+}
