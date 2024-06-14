@@ -58,7 +58,7 @@ export async function POST(request: Request) {
     if (!sender) {
       return NextResponse.json({ message: 'We could not identify the sender' })
     }
-    const createdMessage = prisma.messages.create({
+    const createdMessage = await prisma.messages.create({
       data: {
         message: optionalMessage || 'no message',
         recipient: sellerId,
