@@ -6,11 +6,48 @@ import { FaLariSign } from 'react-icons/fa6'
 import { useDispatch } from 'react-redux'
 import { toggleOfferPriceOpen } from '@/lib/slice/productSlice'
 import { useState } from 'react'
+import axios from 'axios'
+import { toast } from 'sonner'
+axios.defaults.baseURL = 'http://localhost:3000'
 
-const OfferPrice = ({ price, bill }: { price: number; bill: string }) => {
+const OfferPrice = ({
+  bill,
+  price,
+  id,
+  sellerId,
+}: {
+  bill: string
+  price: number
+  id: string
+  sellerId: string
+}) => {
   const dispatch = useDispatch()
-  const [offeredPrice, setOfferedPrice] = useState('')
+  const [offeredPrice, setOfferedPrice] = useState<number>()
   const [optionalMessage, setOptionalMessage] = useState('')
+
+  const sendOfferedPrice = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      if (!offeredPrice) {
+        return toast.error('აუცილებელია მიუთითოთ ფასი.')
+      }
+      const response = await axios.post('/api/messages', {
+        type: 'Offer',
+        offeredPrice,
+        sellerId,
+        optionalMessage,
+        productId: id,
+      })
+      dispatch(toggleOfferPriceOpen({ bool: false }))
+      setOfferedPrice(0)
+      setOptionalMessage('')
+
+      console.log(response.data)
+    } catch (err: any) {
+      toast.error(err.message)
+    }
+  }
+
   return (
     <div className='py-10 shadow-xl px-5 bg-white relative rounded-2xl flex flex-col items-center w-[450px] gap-4'>
       <button
@@ -29,12 +66,16 @@ const OfferPrice = ({ price, bill }: { price: number; bill: string }) => {
           </div>
         </div>
       </div>
-      <form className='flex flex-col w-full items-center gap-4'>
+      <form
+        onSubmit={sendOfferedPrice}
+        className='flex flex-col w-full items-center gap-4'
+      >
         <div className='h-[40px] rounded-lg overflow-hidden w-full border'>
           <input
+            type='number'
             value={offeredPrice}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setOfferedPrice(e.target.value)
+              setOfferedPrice(parseInt(e.target.value))
             }
             placeholder={`მაგ: ${price - 1}`}
             className='w-full h-full outline-none px-3'

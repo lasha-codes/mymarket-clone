@@ -51,7 +51,7 @@ export async function POST(request: Request) {
       request.json(),
       currentUser(),
     ])
-    const { type, offeredPrice, sellerId, optionalMessage } = data
+    const { type, offeredPrice, sellerId, optionalMessage, productId } = data
     const sender = await prisma.user.findUnique({
       where: { email: signedUser?.emailAddresses[0].emailAddress },
     })
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
     }
     const createdMessage = prisma.messages.create({
       data: {
-        message: optionalMessage || '',
+        message: optionalMessage || 'no message',
         recipient: sellerId,
         user: {
           connect: {
@@ -69,6 +69,11 @@ export async function POST(request: Request) {
         },
         type: type,
         offerPrice: offeredPrice,
+        optionalProduct: {
+          connect: {
+            id: productId,
+          },
+        },
       },
     })
 

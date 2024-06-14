@@ -79,6 +79,8 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
         <OfferPrice
           price={productById?.price as number}
           bill={productById?.bill as string}
+          id={productById?.id as string}
+          sellerId={productById?.userId as string}
         />
       </div>
     </section>
