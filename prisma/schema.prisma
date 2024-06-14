@@ -55,9 +55,9 @@ model Messages {
   userId          String
   read            String?
   offerPrice      Int?
-  optionalProduct Product? @relation(fields: [productId], references: [id])
+  optionalProduct Product? @relation(fields: [offerProductId], references: [id])
   createdAt       DateTime @default(now())
-  productId       String?
+  offerProductId  String?
 }
 
 model User {

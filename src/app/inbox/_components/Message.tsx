@@ -51,7 +51,10 @@ const Message = ({
   const { products } = useSelector((state: any) => state.product)
 
   const productById = products.find((product: Product) => {
-    return product.id == sent_message?.productId
+    return (
+      product.id === sent_message?.offerProductId ||
+      product.id === received_message?.offerProductId
+    )
   })
 
   const ReturnSentMessageComponent = () => {
@@ -203,6 +206,99 @@ const Message = ({
             <button
               onClick={() => setShowMessage(!showMessage)}
               className={`text-sm text-blue-500 font-medium ${
+                received_message?.message.length <= 120 && 'hidden'
+              }`}
+            >
+              {showMessage ? 'hide' : 'show'}
+            </button>
+          </div>
+        </div>
+      )
+    } else if (received_message?.type === 'Offer') {
+      return (
+        <div
+          className='bg-white shadow-md rounded-2xl transition-all duration-300 
+      ease-linear px-5 py-3 flex flex-col gap-3 items-start max-w-[500px]'
+        >
+          <div
+            className='flex items-center gap-3 transition-all duration-300 
+     ease-linear'
+          >
+            <div
+              className='relative rounded-full transition-all duration-300 
+     ease-linear 
+      overflow-hidden w-[30px] h-[30px]'
+            >
+              <Image
+                src={
+                  'https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18yaFNsSkE2WktEVVVMOEpHUHBHUHo4UWlnT0oiLCJyaWQiOiJ1c2VyXzJoVzFDeXZhaWZ2ZmIwMUhmUU9Ud0dkWFdXNiJ9'
+                }
+                fill
+                className='object-cover'
+                alt='user profile'
+              />
+            </div>
+            <div className='flex items-center gap-2'>
+              <Link href='' className='text-[15px]'>
+                @{sender?.email}
+              </Link>
+            </div>
+          </div>
+          <div
+            className='flex flex-col items-end transition-all duration-300 
+     ease-linear'
+          >
+            <div
+              className='self-start my-3 flex items-start justify-between 
+     gap-5'
+            >
+              <div
+                className='w-[100px] h-[80px] relative rounded overflow-hidden 
+     self-start'
+              >
+                <Image
+                  src={productById?.images[0]}
+                  fill
+                  className='object-cover'
+                  alt=''
+                />
+              </div>
+              <div className='flex flex-col gap-5'>
+                {productById?.youtubeURL && (
+                  <div className='flex items-start gap-2'>
+                    <div className='flex items-center gap-2'>
+                      <FaYoutube className='text-red-500 text-[15px]' />
+                      <span className='text-[13px] font-medium'>ბმული: </span>
+                    </div>
+                    <a
+                      href={productById.youtubeURL}
+                      className='flex items-center gap-1 text-[13px] text-blue-600 
+     hover:text-blue-700 transition-all'
+                      target='_blank'
+                    >
+                      <FaLink />
+                      {productById.youtubeURL}
+                    </a>
+                  </div>
+                )}
+                {productById && (
+                  <Link
+                    href={`/products/${productById?.id}`}
+                    className='text-[15px] text-black/90'
+                  >
+                    მონახულება
+                  </Link>
+                )}
+              </div>
+            </div>
+            <p className={`text-sm text-slate-500`}>
+              {showMessage
+                ? received_message.message
+                : truncateMessage(received_message.message)}
+            </p>
+            <button
+              onClick={() => setShowMessage(!showMessage)}
+              className={`bg-blue-500 hover:bg-blue-600 transition-all duration-200 ease-linear ${
                 received_message?.message.length <= 120 && 'hidden'
               }`}
             >
