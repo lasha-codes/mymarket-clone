@@ -1,9 +1,12 @@
 'use client'
 
-import { Messages, User } from '@prisma/client'
+import { Messages, Product, User } from '@prisma/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { FaLink } from 'react-icons/fa6'
+import { FaYoutube } from 'react-icons/fa'
 
 const getUsers = (users: User[], recipientId: string, senderId: string) => {
   const sender = users.find((user) => {
@@ -45,6 +48,12 @@ const Message = ({
     }
   }
 
+  const { products } = useSelector((state: any) => state.product)
+
+  const productById = products.find((product: Product) => {
+    return product.id == sent_message?.productId
+  })
+
   const ReturnSentMessageComponent = () => {
     if (sent_message && sent_message.type === 'Purchase') {
       return (
@@ -75,7 +84,9 @@ const Message = ({
 
             <button
               onClick={() => setShowMessage(!showMessage)}
-              className='text-sm text-white font-medium'
+              className={`${
+                sent_message?.message.length <= 120 && 'hidden'
+              } text-sm text-white font-medium`}
             >
               {showMessage ? 'hide' : 'show'}
             </button>
@@ -109,6 +120,42 @@ const Message = ({
             </div>
           </div>
           <div className='flex flex-col items-end transition-all duration-300 ease-linear'>
+            <div className='self-start my-3 flex items-start justify-between gap-5'>
+              <div className='w-[100px] h-[80px] relative rounded overflow-hidden self-start'>
+                <Image
+                  src={productById?.images[0]}
+                  fill
+                  className='object-cover'
+                  alt=''
+                />
+              </div>
+              <div className='flex flex-col gap-5'>
+                {productById?.youtubeURL && (
+                  <div className='flex items-start gap-2'>
+                    <div className='flex items-center gap-2'>
+                      <FaYoutube className='text-red-500 text-[15px]' />
+                      <span className='text-[13px] font-medium'>ბმული: </span>
+                    </div>
+                    <a
+                      href={productById.youtubeURL}
+                      className='flex items-center gap-1 text-[13px] text-blue-600 hover:text-blue-700 transition-all'
+                      target='_blank'
+                    >
+                      <FaLink />
+                      {productById.youtubeURL}
+                    </a>
+                  </div>
+                )}
+                {productById && (
+                  <Link
+                    href={`/products/${productById?.id}`}
+                    className='text-[15px] text-black/90'
+                  >
+                    მონახულება
+                  </Link>
+                )}
+              </div>
+            </div>
             <p className={`text-sm text-slate-500`}>
               {showMessage
                 ? sent_message.message
@@ -116,7 +163,7 @@ const Message = ({
             </p>
             <button
               onClick={() => setShowMessage(!showMessage)}
-              className='text-sm text-white font-medium'
+              className={`${sent_message?.message.length <= 120 && 'hidden'}`}
             >
               {showMessage ? 'hide' : 'show'}
             </button>
@@ -155,7 +202,9 @@ const Message = ({
             </p>
             <button
               onClick={() => setShowMessage(!showMessage)}
-              className={`text-sm text-blue-500 font-medium`}
+              className={`text-sm text-blue-500 font-medium ${
+                received_message?.message.length <= 120 && 'hidden'
+              }`}
             >
               {showMessage ? 'hide' : 'show'}
             </button>
