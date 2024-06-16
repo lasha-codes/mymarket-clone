@@ -2,11 +2,11 @@ import { Product } from '@prisma/client'
 import { createSlice } from '@reduxjs/toolkit'
 
 type initialStateType = {
-  cart: Product[] | any
+  cartItems: Product[] | any
 }
 
 const initialState: initialStateType = {
-  cart: [],
+  cartItems: [],
 }
 
 const cart = createSlice({
@@ -14,10 +14,20 @@ const cart = createSlice({
   initialState: initialState,
   reducers: {
     addToCart: (state, { payload }) => {
-      const { product }: { product: Product } = payload
-      state.cart = [...state.cart, { ...product, count: 0 }]
+      const { product, productId }: { product: Product; productId: string } =
+        payload
+      const productInCart = state.cartItems.find((item: Product) => {
+        return productId === item.id
+      })
+      if (productInCart) {
+        productInCart.count += 1
+      } else {
+        state.cartItems.push({ ...product, count: 1 })
+      }
+      console.log(state.cartItems)
     },
   },
 })
 
 export default cart.reducer
+export const { addToCart } = cart.actions

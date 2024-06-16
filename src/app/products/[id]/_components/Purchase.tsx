@@ -7,6 +7,8 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 import { useDispatch } from 'react-redux'
 import { toggleOfferPriceOpen } from '@/lib/slice/productSlice'
+import { FaShoppingCart } from 'react-icons/fa'
+import { addToCart } from '@/lib/slice/cartSlice'
 
 type PurchaseProps = {
   priceOffers: string[]
@@ -16,6 +18,20 @@ type PurchaseProps = {
 
 const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
   const dispatch = useDispatch()
+
+  const AddToCartComponent = () => {
+    return (
+      <button
+        onClick={() => dispatch(addToCart({ product, productId: product.id }))}
+        className='w-full flex items-center justify-center gap-3 py-2.5 rounded-xl bg-mainYellow px-5 text-white hover:bg-[#ebc418] transition-all duration-300 ease-linear'
+      >
+        <FaShoppingCart className='text-lg' />
+        <div className='h-[15px] w-[1px] bg-white' />
+        <span>დამატება</span>
+      </button>
+    )
+  }
+
   const ReturnPriceOffer = () => {
     if (priceOffers?.includes('ფასი შეთავაზებით')) {
       return (
@@ -40,6 +56,7 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
           >
             შეთავაზე ფასი
           </button>
+          <AddToCartComponent />
         </div>
       )
     } else if (
@@ -73,6 +90,7 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
           >
             შეთავაზე ფასი
           </button>
+          <AddToCartComponent />
         </div>
       )
     } else {
@@ -103,12 +121,13 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
           >
             შეთავაზე ფასი
           </button>
+          <AddToCartComponent />
         </div>
       )
     }
   }
   return (
-    <div className='bg-white rounded-xl p-5 max-[840px]:block max-[785px]:relative max-[785px]:bottom-[0px] max-[785px]:min-w-full max-[785px]:max-w-full max-[840px]:right-[20px] max-[785px]:right-0 max-[840px]:bottom-[76.5px] flex flex-col gap-3 border min-w-[300px] max-w-[350px] max-md:max-w-[320px] max-h-[200px]'>
+    <div className='bg-white rounded-xl p-5 max-[840px]:block max-[785px]:relative max-[785px]:bottom-[0px] max-[785px]:min-w-full max-[785px]:max-w-full max-[840px]:right-[20px] max-[785px]:right-0 max-[840px]:bottom-[76.5px] flex flex-col gap-3 border min-w-[300px] max-w-[350px] max-md:max-w-[320px] max-h-[250px]'>
       <ReturnPriceOffer />
     </div>
   )
