@@ -31,15 +31,26 @@ const cart = createSlice({
       })
       if (productInCart) {
         productInCart.count++
-        toast.success(`incremented ${product.name} QTY`)
+        toast.success(`${product.name} QTY incremented`)
       } else {
         state.cartItems.push({ ...product, count: 1 })
         toast.success(`${product.name} added to the cart`)
       }
       localStorage.setItem('cart', JSON.stringify(state.cartItems))
     },
+    incrementProduct: (state, { payload }) => {
+      const { productId }: { productId: string } = payload
+      const targetProduct: any = state.cartItems.find((product: Product) => {
+        return productId === product.id
+      })
+      if (targetProduct) {
+        targetProduct.count++
+        toast.success(`${targetProduct.name} QTY incremented`)
+        localStorage.setItem('cart', JSON.stringify(state.cartItems))
+      }
+    },
   },
 })
 
 export default cart.reducer
-export const { addToCart, renderCart } = cart.actions
+export const { addToCart, renderCart, incrementProduct } = cart.actions
