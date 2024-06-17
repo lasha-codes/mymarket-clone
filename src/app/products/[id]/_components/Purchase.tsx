@@ -22,7 +22,9 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
   const AddToCartComponent = () => {
     return (
       <button
-        onClick={() => dispatch(addToCart({ product, productId: product.id }))}
+        onClick={() =>
+          dispatch(addToCart({ product: product, productId: product.id }))
+        }
         className='w-full flex items-center justify-center gap-3 py-2.5 rounded-xl bg-mainYellow px-5 text-white hover:bg-[#ebc418] transition-all duration-300 ease-linear'
       >
         <FaShoppingCart className='text-lg' />

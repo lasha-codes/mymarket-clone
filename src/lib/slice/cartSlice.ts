@@ -1,8 +1,9 @@
 import { Product } from '@prisma/client'
 import { createSlice } from '@reduxjs/toolkit'
+import { toast } from 'sonner'
 
 type initialStateType = {
-  cartItems: Product[] | any
+  cartItems: any
 }
 
 const initialState: initialStateType = {
@@ -13,6 +14,15 @@ const cart = createSlice({
   name: 'cart',
   initialState: initialState,
   reducers: {
+    renderCart: (state) => {
+      const localCart = JSON.parse(localStorage.getItem('cart')!)
+      if (!localCart) {
+        state.cartItems = []
+      } else {
+        state.cartItems = localCart
+      }
+      console.log(state.cartItems)
+    },
     addToCart: (state, { payload }) => {
       const { product, productId }: { product: Product; productId: string } =
         payload
@@ -20,14 +30,16 @@ const cart = createSlice({
         return productId === item.id
       })
       if (productInCart) {
-        productInCart.count += 1
+        productInCart.count++
+        toast.success(`incremented ${product.name} QTY`)
       } else {
         state.cartItems.push({ ...product, count: 1 })
+        toast.success(`${product.name} added to the cart`)
       }
-      console.log(state.cartItems)
+      localStorage.setItem('cart', JSON.stringify(state.cartItems))
     },
   },
 })
 
 export default cart.reducer
-export const { addToCart } = cart.actions
+export const { addToCart, renderCart } = cart.actions
