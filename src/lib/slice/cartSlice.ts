@@ -49,8 +49,26 @@ const cart = createSlice({
         localStorage.setItem('cart', JSON.stringify(state.cartItems))
       }
     },
+    decrementProduct: (state, { payload }) => {
+      const { productId }: { productId: string } = payload
+      const targetProduct: any = state.cartItems.find((product: Product) => {
+        return productId === product.id
+      })
+      if (targetProduct) {
+        if (targetProduct.count === 1) {
+          state.cartItems = state.cartItems.filter((product: Product) => {
+            return product.id !== targetProduct.id
+          })
+        } else {
+          targetProduct.count -= 1
+          toast.success(`${targetProduct.name} QTY decreased`)
+        }
+        localStorage.setItem('cart', JSON.stringify(state.cartItems))
+      }
+    },
   },
 })
 
 export default cart.reducer
-export const { addToCart, renderCart, incrementProduct } = cart.actions
+export const { addToCart, renderCart, incrementProduct, decrementProduct } =
+  cart.actions
