@@ -10,8 +10,13 @@ import { changeInputsVal } from '@/lib/slice/productSlice'
 
 const SelectPrice = () => {
   const dispatch = useDispatch()
-  const { selectedPriceOffers, billBoxOpen, selectedBill, productPrice } =
-    useSelector((state: any) => state.product)
+  const {
+    selectedPriceOffers,
+    billBoxOpen,
+    selectedBill,
+    productPrice,
+    inStock,
+  } = useSelector((state: any) => state.product)
   return (
     <div className='bg-white rounded-2xl gap-5 flex flex-col items-start py-12 px-10 w-full'>
       <h3 className='text-[16px] font-semibold'>ფასი</h3>
@@ -73,6 +78,27 @@ const SelectPrice = () => {
                 )
               })}
             </div>
+          </div>
+        </div>
+        <div className='flex flex-col gap-2 mt-4'>
+          <h4 className='text-[14px] font-medium'>
+            მიუთითე მარაგი <span className='text-[13px] text-red-500'>*</span>
+          </h4>
+          <div className='w-[65%] flex items-center'>
+            <input
+              value={inStock}
+              onChange={(e) =>
+                dispatch(
+                  changeInputsVal({
+                    value: parseInt(e.target.value),
+                    targetedValue: 'stock',
+                  })
+                )
+              }
+              type='number'
+              className='h-[53px] rounded-xl border py-2 px-4 w-full outline-none placeholder:text-black/60'
+              placeholder='1'
+            />
           </div>
         </div>
         <div className='flex items-center justify-start gap-3 mt-3'>

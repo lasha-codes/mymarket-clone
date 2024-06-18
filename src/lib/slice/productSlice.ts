@@ -25,6 +25,7 @@ type initialStateType = {
   sellerName: string
   sellerPhone: number | string
   offerPriceOpen: boolean
+  inStock: number
 }
 
 const initialState: initialStateType = {
@@ -49,6 +50,7 @@ const initialState: initialStateType = {
   sellerName: '',
   sellerPhone: '',
   offerPriceOpen: false,
+  inStock: 1,
 }
 
 export const fetchProducts = createAsyncThunk('products/fetch', async () => {
@@ -153,6 +155,12 @@ const productSlice = createSlice({
         state.sellerName = value as string
       } else if (targetedValue === 'sellerPhone') {
         state.sellerPhone = value as number
+      } else if (targetedValue === 'stock') {
+        if ((value as number) <= 0 || !value) {
+          state.inStock = 1
+        } else {
+          state.inStock = value as number
+        }
       }
     },
     toggleOfferPriceOpen: (state, { payload }) => {

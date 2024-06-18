@@ -14,7 +14,8 @@ export const uploadProduct = async (
   productCondition: string,
   selectedPriceOffers: string[] | [],
   selectedBill: number,
-  selectedType: string
+  selectedType: string,
+  inStock: number
 ) => {
   'use client'
   try {
@@ -32,6 +33,7 @@ export const uploadProduct = async (
       selectedPriceOffers,
       selectedBill,
       selectedType,
+      inStock,
     })
 
     console.log(data)

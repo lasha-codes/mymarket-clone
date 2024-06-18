@@ -55,6 +55,7 @@ export async function POST(request: Request) {
         youtubeURL: body.youtubeURL as string,
         type: body.selectedType as string,
         condition: body.productCondition as string,
+        inStock: body.inStock as number,
       },
       select: { name: true, images: true, price: true, description: true },
     })

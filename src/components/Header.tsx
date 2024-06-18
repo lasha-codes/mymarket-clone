@@ -10,6 +10,7 @@ import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { IoIosSearch } from 'react-icons/io'
 import { usePathname } from 'next/navigation'
 import { FaCirclePlus } from 'react-icons/fa6'
+import { useState, useEffect } from 'react'
 
 const links = [
   { icon: MdOutlineMailOutline, href: '/inbox' },
@@ -19,11 +20,14 @@ const links = [
 
 const Header = () => {
   const pathname = usePathname()
+  const [isClient, setIsClient] = useState<boolean>(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   return (
-    <header
-      suppressHydrationWarning
-      className='flex flex-col items-start gap-9 px-[200px] max-2xl:px-[150px] max-lg:px-[80px] max-md:px-[35px] max-sm:px-[20px]'
-    >
+    <header className='flex flex-col items-start gap-9 px-[200px] max-2xl:px-[150px] max-lg:px-[80px] max-md:px-[35px] max-sm:px-[20px]'>
       <div className='w-full flex items-center justify-between relative'>
         <div className='absolute w-screen h-[1px] bg-gray-200 bottom-1.5 left-1/2 translate-x-[-50%]' />
         <Link href='/' className='relative w-[200px] -ml-[25px] h-[100px]'>
@@ -34,7 +38,7 @@ const Header = () => {
             fill
           />
         </Link>
-        <nav suppressHydrationWarning className='flex items-center gap-8'>
+        <div className='flex items-center gap-8'>
           <Link
             href='/sell-item'
             className='bg-[#FFF4CC] flex hover:bg-[#FFEFB2] cursor-pointer transition-all ease-linear items-center h-[42px] w-[130px] justify-center rounded-xl gap-2'
@@ -63,19 +67,25 @@ const Header = () => {
               )
             })}
           </div>
-          <SignedOut>
-            <Link
-              href='/login'
-              className='flex items-center cursor-pointer gap-2 hover:bg-[#F6F6F6] transition-all ease-linear w-[120px] h-[42px] justify-center border rounded-xl'
-            >
-              <FiUser className='text-xl' />
-              <span>შესვლა</span>
-            </Link>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </nav>
+
+          {isClient && (
+            <SignedOut>
+              <Link
+                href='/login'
+                className='flex items-center cursor-pointer gap-2 hover:bg-[#F6F6F6] transition-all ease-linear w-[120px] h-[42px] justify-center border rounded-xl'
+              >
+                <FiUser className='text-xl' />
+                <span>შესვლა</span>
+              </Link>
+            </SignedOut>
+          )}
+
+          {isClient && (
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          )}
+        </div>
       </div>
       {pathname === '/' && (
         <div className='flex flex-col items-start gap-6 w-full'>

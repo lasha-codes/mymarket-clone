@@ -14,27 +14,29 @@ datasource db {
 }
 
 model Product {
-  id            String     @id @default(uuid())
-  name          String
-  images        String[]
-  description   String
-  type          String
-  price         Int
-  condition     String
-  category      String
-  youtubeURL    String?
-  location      String
-  contactName   String
-  contactNumber Int
-  priceDealType String[]
-  userId        String
-  bill          String?
-  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-  views         Int        @default(0)
-  Orders        Orders[]
-  Messages      Messages[]
+  id                   String     @id @default(uuid())
+  name                 String
+  images               String[]
+  description          String
+  type                 String
+  price                Int
+  condition            String
+  category             String
+  youtubeURL           String?
+  location             String
+  contactName          String
+  contactNumber        Int
+  priceDealType        String[]
+  userId               String
+  bill                 String?
+  user                 User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
+  views                Int        @default(0)
+  availableForPurchase Boolean    @default(true)
+  inStock              Int        @default(1)
+  Orders               Orders[]
+  Messages             Messages[]
 }
 
 model Orders {

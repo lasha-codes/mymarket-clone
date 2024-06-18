@@ -21,6 +21,7 @@ const UploadProduct = () => {
     selectedBill,
     selectedConditionIndex,
     selectedTypeIndex,
+    inStock,
   } = useSelector((state: any) => state.product)
 
   const productCondition = productConditions[selectedConditionIndex]
@@ -82,7 +83,8 @@ const UploadProduct = () => {
             productCondition,
             selectedPriceOffers,
             selectedBill,
-            selectedType
+            selectedType,
+            inStock
           )
           toast.success('განცხადება გამოქვეყნდა')
           setTimeout(() => {
