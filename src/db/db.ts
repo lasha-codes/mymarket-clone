@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 const main = async () => {
   const first_product = await prisma.product.findFirst({
     select: { inStock: true, availableForPurchase: true },
-    where: { name: 'Asus ROG Strix G18 გეიმინგ ლეპტოპი' },
+    where: { id: 'fa878913-c353-42c0-a972-63ebd6edd8d7' },
   })
   return first_product
 }
