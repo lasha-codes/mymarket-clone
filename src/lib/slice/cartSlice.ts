@@ -1,6 +1,7 @@
 import { Product } from '@prisma/client'
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'sonner'
+import prisma from '@/db/db'
 
 type initialStateType = {
   cartItems: any
@@ -30,8 +31,12 @@ const cart = createSlice({
         return productId === item.id
       })
       if (productInCart) {
-        productInCart.count++
-        toast.success(`${product.name} QTY incremented`)
+        if (productInCart.inStock - productInCart.count > 0) {
+          productInCart.count++
+          toast.success(`${product.name} QTY incremented`)
+        } else {
+          toast.error('მაქსიმუმი მარაგი უკვე დამატებულია')
+        }
       } else {
         state.cartItems.push({ ...product, count: 1 })
         toast.success(`${product.name} added to the cart`)
@@ -43,10 +48,12 @@ const cart = createSlice({
       const targetProduct: any = state.cartItems.find((product: Product) => {
         return productId === product.id
       })
-      if (targetProduct) {
+      if (targetProduct && targetProduct.inStock - targetProduct.count > 0) {
         targetProduct.count++
         toast.success(`${targetProduct.name} QTY incremented`)
         localStorage.setItem('cart', JSON.stringify(state.cartItems))
+      } else {
+        toast.error('მაქსიმუმი მარაგი უკვე დამატებულია')
       }
     },
     decrementProduct: (state, { payload }) => {
