@@ -9,6 +9,7 @@ import { FaLink } from 'react-icons/fa6'
 import { FaYoutube } from 'react-icons/fa'
 import { FaLariSign } from 'react-icons/fa6'
 import { FiDollarSign } from 'react-icons/fi'
+import { format } from 'date-fns'
 
 const getUsers = (users: User[], recipientId: string, senderId: string) => {
   const sender = users.find((user) => {
@@ -337,13 +338,20 @@ const Message = ({
     }
   }
 
-  {
-    return type === 'sent' ? (
-      <ReturnSentMessageComponent />
-    ) : (
-      <ReturnReceivedMessage />
-    )
-  }
+  return (
+    <div className='flex flex-col items-start gap-2'>
+      <span className='text-sm capitalize font-medium text-gray-600'>
+        {sent_message
+          ? format(sent_message.createdAt, 'dd MMMM - HH.mm')
+          : format(received_message!.createdAt, 'dd MMMM - HH.mm')}
+      </span>
+      {type === 'sent' ? (
+        <ReturnSentMessageComponent />
+      ) : (
+        <ReturnReceivedMessage />
+      )}
+    </div>
+  )
 }
 
 export default Message

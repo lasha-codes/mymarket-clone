@@ -49,8 +49,8 @@ const messages = createSlice({
     }),
       builder.addCase(fetchMessages.fulfilled, (state, { payload }) => {
         state.messages = payload
+
         state.messagesLoading = false
-        console.log(state.messages)
       }),
       builder.addCase(fetchMessages.rejected, (state) => {
         state.messagesLoading = false

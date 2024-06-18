@@ -26,10 +26,12 @@ export async function GET(request: Request) {
       where: {
         recipient: userFromTheDB.id,
       },
+      orderBy: { createdAt: 'desc' },
     })
 
     const sentMessages = await prisma.messages.findMany({
       where: { userId: userFromTheDB.id },
+      orderBy: { createdAt: 'desc' },
     })
 
     if (!receivedMessages || !sentMessages) {
