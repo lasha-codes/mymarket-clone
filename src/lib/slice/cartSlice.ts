@@ -1,14 +1,15 @@
 import { Product } from '@prisma/client'
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'sonner'
-import prisma from '@/db/db'
 
 type initialStateType = {
   cartItems: any
+  wishlist: Product[]
 }
 
 const initialState: initialStateType = {
   cartItems: [],
+  wishlist: [],
 }
 
 const cart = createSlice({
@@ -81,6 +82,26 @@ const cart = createSlice({
         localStorage.setItem('cart', JSON.stringify(state.cartItems))
       }
     },
+    toggleWishlist: (state, { payload }) => {
+      const { product }: { product: Product } = payload
+      const alreadyInWishlist = state.wishlist.find((item) => {
+        return product.id === item.id
+      })
+      if (alreadyInWishlist) {
+        state.wishlist = state.wishlist.filter((item) => {
+          return item.id !== product.id
+        })
+      } else {
+        state.wishlist.push(product)
+      }
+      localStorage.setItem('wishlist', JSON.stringify(state.wishlist))
+    },
+    renderWishlist: (state, { payload }) => {
+      const fromStorage = JSON.parse(localStorage.getItem('wishlist')!)
+      if (fromStorage) {
+        state.wishlist = fromStorage
+      }
+    },
   },
 })
 
@@ -91,4 +112,6 @@ export const {
   incrementProduct,
   handlePurchase,
   decrementProduct,
+  toggleWishlist,
+  renderWishlist,
 } = cart.actions
