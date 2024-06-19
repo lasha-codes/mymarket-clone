@@ -6,7 +6,6 @@ export async function GET() {
   try {
     const products = await prisma.product.findMany({
       orderBy: { createdAt: 'desc' },
-      where: { availableForPurchase: true },
     })
     if (!products) {
       return NextResponse.json({ message: "Couldn't find any products" })

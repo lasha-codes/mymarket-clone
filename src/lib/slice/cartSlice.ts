@@ -80,11 +80,20 @@ const cart = createSlice({
           return product.id === purchaseId
         }
       )
+      const inWishList = state.wishlist.find((item) => {
+        return item.id === purchaseId
+      })
       if (purchasedInCart) {
         state.cartItems = state.cartItems.filter((product: Product) => {
           return product.id !== purchasedInCart.id
         })
         localStorage.setItem('cart', JSON.stringify(state.cartItems))
+      }
+      if (inWishList) {
+        state.wishlist = state.wishlist.filter((item) => {
+          return item.id !== inWishList.id
+        })
+        localStorage.setItem('wishlist', JSON.stringify(state.wishlist))
       }
     },
     toggleWishlist: (state, { payload }) => {

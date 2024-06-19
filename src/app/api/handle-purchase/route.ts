@@ -47,6 +47,11 @@ export async function POST(request: Request) {
           availableForPurchase: false,
         },
       })
+    } else {
+      await prisma.product.update({
+        where: { id: purchasedProduct.id },
+        data: { inStock: purchasedProduct.inStock - 1 },
+      })
     }
 
     const specificOrderExists = await prisma.orders.findFirst({
