@@ -21,7 +21,6 @@ import ProductPurchaseInfo from './ProductPurchaseInfo'
 import ReactPlayer from 'react-player'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
-import axios from 'axios'
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -139,7 +138,13 @@ function Form({
       />
       <PaymentElement />
       <button className='rounded-lg px-20 py-3 bg-[#9966FF] hover:bg-[#8146f7] transition-all duration-300 ease-linear text-white font-medium'>
-        {paymentPending ? 'მუშავდება...' : 'გადახდა'}
+        {paymentPending ? (
+          <div className='flex items-center justify-center gap-2'>
+            მუშავდება <div className='loader' />{' '}
+          </div>
+        ) : (
+          'გადახდა'
+        )}
       </button>
     </form>
   )

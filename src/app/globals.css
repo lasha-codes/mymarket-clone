@@ -85,3 +85,46 @@ input::-webkit-inner-spin-button {
     @apply bg-background text-foreground;
   }
 }
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 30px;
+  height: 13px;
+  display: grid;
+  color: #fff;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  grid-area: 1/1;
+  --c: #0000 calc(100% / 3), #fff 0 calc(2 * 100% / 3), #0000 0;
+  --c1: linear-gradient(90deg, var(--c));
+  --c2: linear-gradient(0deg, var(--c));
+  background: var(--c1), var(--c2), var(--c1), var(--c2);
+  background-size: 300% 3px, 3px 300%;
+  background-repeat: no-repeat;
+  animation: l15 1.5s infinite;
+}
+.loader:after {
+  animation-delay: -0.75s;
+}
+@keyframes l15 {
+  0% {
+    background-position: 50% 0, 100% 100%, 0 100%, 0 0;
+  }
+  25% {
+    background-position: 0 0, 100% 50%, 0 100%, 0 0;
+  }
+  50% {
+    background-position: 0 0, 100% 0, 50% 100%, 0 0;
+  }
+  75% {
+    background-position: 0 0, 100% 0, 100% 100%, 0 50%;
+  }
+  75.01% {
+    background-position: 100% 0, 100% 0, 100% 100%, 0 50%;
+  }
+  100% {
+    background-position: 50% 0, 100% 0, 100% 100%, 0 100%;
+  }
+}
