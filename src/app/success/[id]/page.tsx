@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux'
 import { Product } from '@prisma/client'
 import { useEffect } from 'react'
 import Link from 'next/link'
+import { handlePurchase } from '@/lib/slice/cartSlice'
+import { useDispatch } from 'react-redux'
 
 axios.defaults.baseURL = 'http://localhost:3000'
 const PurchaseSuccessPage = ({
@@ -15,6 +17,7 @@ const PurchaseSuccessPage = ({
   params: { id: string }
   searchParams: { payment_intent: string }
 }) => {
+  const dispatch = useDispatch()
   const { products }: { products: Product[] } = useSelector(
     (state: any) => state.product
   )
@@ -38,6 +41,9 @@ const PurchaseSuccessPage = ({
           id: productWithId.id,
         }
       )
+
+      dispatch(handlePurchase({ purchaseId: params.id }))
+
       if (data.message) {
         return toast.error(data.message)
       }

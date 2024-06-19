@@ -67,9 +67,28 @@ const cart = createSlice({
         localStorage.setItem('cart', JSON.stringify(state.cartItems))
       }
     },
+    handlePurchase: (state, { payload }) => {
+      const { purchaseId }: { purchaseId: string } = payload
+      const purchasedInCart: Product | null = state.cartItems.find(
+        (product: Product) => {
+          return product.id === purchaseId
+        }
+      )
+      if (purchasedInCart) {
+        state.cartItems = state.cartItems.filter((product: Product) => {
+          return product.id !== purchasedInCart.id
+        })
+        localStorage.setItem('cart', JSON.stringify(state.cartItems))
+      }
+    },
   },
 })
 
 export default cart.reducer
-export const { addToCart, renderCart, incrementProduct, decrementProduct } =
-  cart.actions
+export const {
+  addToCart,
+  renderCart,
+  incrementProduct,
+  handlePurchase,
+  decrementProduct,
+} = cart.actions
