@@ -5,7 +5,7 @@ import { FiDollarSign } from 'react-icons/fi'
 import { FaLariSign, FaStripe } from 'react-icons/fa6'
 import Link from 'next/link'
 import { toast } from 'sonner'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toggleOfferPriceOpen } from '@/lib/slice/productSlice'
 import { FaShoppingCart } from 'react-icons/fa'
 import { addToCart } from '@/lib/slice/cartSlice'
@@ -18,18 +18,29 @@ type PurchaseProps = {
 
 const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
   const dispatch = useDispatch()
-
   const AddToCartComponent = () => {
+    const { cartItems }: { cartItems: Product[] } = useSelector(
+      (state: any) => state.cart
+    )
+
+    const productInCart = cartItems.find((item: Product) => {
+      return item.id === product?.id
+    })
+
     return (
       <button
         onClick={() =>
           dispatch(addToCart({ product: product, productId: product.id }))
         }
-        className='w-full flex items-center justify-center gap-3 py-2.5 rounded-xl bg-mainYellow px-5 text-white hover:bg-[#ebc418] transition-all duration-300 ease-linear'
+        className={`w-full flex items-center border justify-center gap-3 py-2.5 rounded-xl px-5 ${
+          productInCart
+            ? 'bg-transparent !border-mainYellow text-mainYellow hover:bg-mainYellow hover:text-white'
+            : 'bg-mainYellow text-white hover:bg-[#ebc418]'
+        } transition-all duration-300 ease-linear border-transparent`}
       >
         <FaShoppingCart className='text-lg' />
         <div className='h-[15px] w-[1px] bg-white' />
-        <span>დამატება</span>
+        <span>{productInCart ? 'დამატებულია' : 'დაამატე'}</span>
       </button>
     )
   }

@@ -15,6 +15,7 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
   const { products, offerPriceOpen } = useSelector(
     (state: any) => state.product
   )
+
   const [productById, setProductById] = useState<Product | null>(null)
 
   useEffect(() => {

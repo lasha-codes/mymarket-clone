@@ -34,6 +34,11 @@ const cart = createSlice({
       if (!productInCart) {
         state.cartItems.push({ ...product })
         toast.success(`${product.name} added to the cart`)
+      } else {
+        state.cartItems = state.cartItems.filter((item: Product) => {
+          return item.id !== productInCart.id
+        })
+        toast.success(`removed ${product.name} from the cart`)
       }
 
       localStorage.setItem('cart', JSON.stringify(state.cartItems))

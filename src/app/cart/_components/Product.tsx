@@ -53,7 +53,7 @@ const CartProduct = ({
           ნახვა
         </Link>
       )}
-      <WishHeart product={product} />
+      {!cartType && <WishHeart product={product} />}
     </div>
   )
 }
