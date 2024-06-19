@@ -10,9 +10,11 @@ import Link from 'next/link'
 const CartProduct = ({
   product,
   count,
+  cartType,
 }: {
   product: Product
   count?: number
+  cartType: boolean
 }) => {
   const { name, price, images, bill } = product
   const dispatch = useDispatch()
@@ -35,12 +37,21 @@ const CartProduct = ({
           <span>{price}</span>
         </div>
       </div>
-      <Link
-        href={`/products/${product.id}/purchase`}
-        className='w-1/2 text-center py-2 rounded-xl bg-mainYellow text-white hover:bg-[#ffbb00] transition-all duration-200 ease-linear'
-      >
-        ყიდვა
-      </Link>
+      {cartType ? (
+        <Link
+          href={`/products/${product.id}/purchase`}
+          className='w-1/2 text-center py-2 rounded-xl bg-mainYellow text-white hover:bg-[#ffbb00] transition-all duration-200 ease-linear'
+        >
+          ყიდვა
+        </Link>
+      ) : (
+        <Link
+          href={`/products/${product.id}`}
+          className='w-1/2 text-center py-2 rounded-xl bg-[#8ea0f1] text-white hover:bg-[#5778c0] transition-all duration-200 ease-linear'
+        >
+          ნახვა{' '}
+        </Link>
+      )}
     </div>
   )
 }
