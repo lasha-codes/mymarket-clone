@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { FiDollarSign } from 'react-icons/fi'
 import { FaLariSign } from 'react-icons/fa6'
 import { useDispatch } from 'react-redux'
+import WishHeart from '@/app/wishlist/_components/WishHeart'
 import Link from 'next/link'
 
 const CartProduct = ({
@@ -19,7 +20,7 @@ const CartProduct = ({
   const { name, price, images, bill } = product
   const dispatch = useDispatch()
   return (
-    <div className='flex flex-col gap-5 items-start'>
+    <div className='flex flex-col gap-5 items-start relative'>
       <div className='flex flex-col items-start gap-2 w-[300px]'>
         <Image
           src={images[0]}
@@ -49,9 +50,10 @@ const CartProduct = ({
           href={`/products/${product.id}`}
           className='w-1/2 text-center py-2 rounded-xl bg-[#8ea0f1] text-white hover:bg-[#5778c0] transition-all duration-200 ease-linear'
         >
-          ნახვა{' '}
+          ნახვა
         </Link>
       )}
+      <WishHeart product={product} />
     </div>
   )
 }
