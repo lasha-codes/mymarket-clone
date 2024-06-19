@@ -30,17 +30,11 @@ const cart = createSlice({
       const productInCart = state.cartItems.find((item: Product) => {
         return productId === item.id
       })
-      if (productInCart) {
-        if (productInCart.inStock - productInCart.count > 0) {
-          productInCart.count++
-          toast.success(`${product.name} QTY incremented`)
-        } else {
-          toast.error('მაქსიმუმი მარაგი უკვე დამატებულია')
-        }
-      } else {
-        state.cartItems.push({ ...product, count: 1 })
+      if (!productInCart) {
+        state.cartItems.push({ ...product })
         toast.success(`${product.name} added to the cart`)
       }
+
       localStorage.setItem('cart', JSON.stringify(state.cartItems))
     },
     incrementProduct: (state, { payload }) => {

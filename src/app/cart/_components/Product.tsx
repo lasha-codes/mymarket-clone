@@ -2,11 +2,10 @@
 
 import { Product } from '@prisma/client'
 import Image from 'next/image'
-import { HiOutlinePlusSm } from 'react-icons/hi'
-import { FiMinus, FiDollarSign } from 'react-icons/fi'
+import { FiDollarSign } from 'react-icons/fi'
 import { FaLariSign } from 'react-icons/fa6'
 import { useDispatch } from 'react-redux'
-import { incrementProduct, decrementProduct } from '@/lib/slice/cartSlice'
+import Link from 'next/link'
 
 const CartProduct = ({
   product,
@@ -29,27 +28,19 @@ const CartProduct = ({
         />
         <h3 className='text-[17px] font-medium'>{name}</h3>
       </div>
-      <div className='flex items-center gap-3'>
-        <button
-          onClick={() => dispatch(incrementProduct({ productId: product.id }))}
-          className='p-0.5 rounded bg-mainYellow text-white group'
-        >
-          <HiOutlinePlusSm className='group-active:scale-90' />
-        </button>
-        <span>{count}</span>
-        <button
-          onClick={() => dispatch(decrementProduct({ productId: product.id }))}
-          className='p-0.5 rounded bg-mainYellow text-white group'
-        >
-          <FiMinus className='group-active:scale-[85%]' />
-        </button>
-      </div>
+
       <div className='flex flex-col items-start gap-5 max-w-[85%]'>
         <div className='flex items-center gap-1 font-medium'>
           {bill === 'ლარი' ? <FaLariSign /> : <FiDollarSign />}
-          <span>{price * count}</span>
+          <span>{price}</span>
         </div>
       </div>
+      <Link
+        href={`/products/${product.id}/purchase`}
+        className='w-1/2 text-center py-2 rounded-xl bg-mainYellow text-white hover:bg-[#ffbb00] transition-all duration-200 ease-linear'
+      >
+        ყიდვა
+      </Link>
     </div>
   )
 }

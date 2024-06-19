@@ -19,7 +19,7 @@ const Products = () => {
   const { products } = useSelector((state: any) => state.product)
 
   return (
-    <div className='flex items-start flex-wrap gap-6 pb-5'>
+    <div className='flex items-start flex-wrap justify-center gap-6 pb-5'>
       {products?.length !== 0 && Array.isArray(products)
         ? products.map((product: Product) => {
             return (
