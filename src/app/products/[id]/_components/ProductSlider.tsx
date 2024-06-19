@@ -9,19 +9,22 @@ import Image from 'next/image'
 import { TbReload } from 'react-icons/tb'
 import { VscSparkleFilled } from 'react-icons/vsc'
 import { BiSolidLike } from 'react-icons/bi'
-import { IoHeartOutline } from 'react-icons/io5'
 import ReactPlayer from 'react-player'
+import Heart from './Heart'
+import { Product } from '@prisma/client'
 
 type ProductSliderProps = {
   images: string[]
   youtubeURL?: string
   condition: string
+  product: Product
 }
 
 const ProductSlider = ({
   images,
   youtubeURL,
   condition,
+  product,
 }: ProductSliderProps) => {
   const ReturnConditionComponent = () => {
     if (condition === 'მეორადი') {
@@ -57,9 +60,7 @@ const ProductSlider = ({
   return (
     <div className='relative w-fit'>
       <ReturnConditionComponent />
-      <div className='p-1.5 rounded-full bg-gray-200 absolute right-6 top-5 z-[10]'>
-        <IoHeartOutline className='text-gray-400 text-[22px] cursor-pointer' />
-      </div>
+      <Heart product={product} />
       <Carousel className='w-[370px] h-[410px] max-xl:w-[320px] max-xl:h-[370px] max-[840px]:min-w-[90vw] max-[840px]:mx-auto rounded-2xl overflow-hidden border max-lg:w-[300px] max-lg:h-[355px] max-md:w-[270px] max-md:h-[330px]'>
         <CarouselContent>
           {images &&

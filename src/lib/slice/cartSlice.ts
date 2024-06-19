@@ -96,7 +96,7 @@ const cart = createSlice({
       }
       localStorage.setItem('wishlist', JSON.stringify(state.wishlist))
     },
-    renderWishlist: (state, { payload }) => {
+    renderWishlist: (state) => {
       const fromStorage = JSON.parse(localStorage.getItem('wishlist')!)
       if (fromStorage) {
         state.wishlist = fromStorage

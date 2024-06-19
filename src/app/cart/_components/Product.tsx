@@ -12,7 +12,7 @@ const CartProduct = ({
   count,
 }: {
   product: Product
-  count: number
+  count?: number
 }) => {
   const { name, price, images, bill } = product
   const dispatch = useDispatch()

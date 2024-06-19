@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react'
 
 const links = [
   { icon: MdOutlineMailOutline, href: '/inbox' },
-  { icon: FaRegHeart, href: '/watchlist' },
+  { icon: FaRegHeart, href: '/wishlist' },
   { icon: FiShoppingCart, href: '/cart' },
 ]
 

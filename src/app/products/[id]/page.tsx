@@ -38,6 +38,7 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
         />
         <div className='flex items-start justify-start gap-6 max-[840px]:flex-col'>
           <ProductSlider
+            product={productById as Product}
             condition={productById?.condition as string}
             images={productById?.images || []}
             youtubeURL={
