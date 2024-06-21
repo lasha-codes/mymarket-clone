@@ -4,8 +4,15 @@ import { FaUser } from 'react-icons/fa'
 import Link from 'next/link'
 import { FaLariSign } from 'react-icons/fa6'
 import { FiDollarSign } from 'react-icons/fi'
+import Heart from './Heart'
 
-const Product = ({ product }: { product: ProductType }) => {
+const Product = ({
+  product,
+  productLiked,
+}: {
+  product: ProductType
+  productLiked: boolean
+}) => {
   return (
     <div className='bg-white p-3 rounded-lg flex hover:shadow-none transition-all duration-300 ease-linear flex-col gap-3 w-[320px] drop-shadow-md shadow-md'>
       <Link
@@ -26,13 +33,14 @@ const Product = ({ product }: { product: ProductType }) => {
         <div className='flex flex-col items-start gap-2.5 w-full'>
           <p className='text-sm'>{product?.name}</p>
           <div className='w-full h-[2px] bg-gray-300/80' />
-          <div className='w-full flex items-center justify-between'>
+          <div className='w-full flex items-center justify-between pb-2'>
             <div className='flex items-center gap-1 font-semibold'>
               {!product.priceDealType.includes('ფასი შეთავაზებით')
                 ? product?.price
                 : 'ფასი შეთავაზებით'}
               {product.bill === 'ლარი' ? <FaLariSign /> : <FiDollarSign />}
             </div>
+            <Heart isLiked={productLiked} product={product} />
           </div>
         </div>
       </div>

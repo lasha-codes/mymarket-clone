@@ -7,6 +7,9 @@ const UserProducts = ({ userId }: { userId: string }) => {
   const { products }: { products: ProductType[] } = useSelector(
     (state: any) => state.product
   )
+
+  const { wishlist } = useSelector((state: any) => state.cart)
+
   const userProducts: any =
     products &&
     products.filter((product) => {
@@ -19,7 +22,12 @@ const UserProducts = ({ userId }: { userId: string }) => {
       <div className='w-full flex items-center justify-center flex-wrap gap-6'>
         {userProducts &&
           userProducts.map((product: ProductType, idx: number) => {
-            return <Product product={product} key={idx} />
+            const inWishList = wishlist.find((item: ProductType) => {
+              return product.id === item.id
+            })
+            return (
+              <Product product={product} productLiked={inWishList} key={idx} />
+            )
           })}
       </div>
     </div>
