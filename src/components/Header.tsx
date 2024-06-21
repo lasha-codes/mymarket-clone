@@ -11,6 +11,7 @@ import { IoIosSearch } from 'react-icons/io'
 import { usePathname } from 'next/navigation'
 import { FaCirclePlus } from 'react-icons/fa6'
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 const links = [
   { icon: MdOutlineMailOutline, href: '/inbox' },
@@ -21,6 +22,7 @@ const links = [
 const Header = () => {
   const pathname = usePathname()
   const [isClient, setIsClient] = useState<boolean>(false)
+  const { user } = useSelector((state: any) => state.user)
 
   useEffect(() => {
     setIsClient(true)
@@ -82,7 +84,16 @@ const Header = () => {
 
           {isClient && (
             <SignedIn>
-              <UserButton />
+              <div className='flex items-center gap-5'>
+                <UserButton />
+                <span className='max-xl:hidden'>-</span>
+                <Link
+                  href={`/users/${user?.id}`}
+                  className='font-medium text-sm bg-[#DAE1FF] transition-all duration-300 ease-linear hover:bg-[#b7c3f8] text-[#4A6CFA] py-[12px] px-6 rounded-xl'
+                >
+                  შემი განცხადებები
+                </Link>
+              </div>
             </SignedIn>
           )}
         </div>
