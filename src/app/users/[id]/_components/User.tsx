@@ -6,6 +6,7 @@ import Image from 'next/image'
 const UserProfile = () => {
   const { dbUsers, user }: { dbUsers: User[] | null; user: User | null } =
     useSelector((state: any) => state.user)
+
   const userInfo: any =
     dbUsers &&
     dbUsers.find((account: User) => {
@@ -19,7 +20,7 @@ const UserProfile = () => {
     )
   }
   return (
-    <div className='w-full justify-between px-6'>
+    <div className='w-full flex items-center justify-between px-6'>
       <div className='flex items-center gap-8'>
         <div className='rounded-full h-[50px] w-[50px] relative overflow-hidden'>
           <Image

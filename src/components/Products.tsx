@@ -18,10 +18,14 @@ const Products = () => {
   const router = useRouter()
   const { products } = useSelector((state: any) => state.product)
 
+  const filteredProducts = products?.filter((product: Product) => {
+    return product.availableForPurchase
+  })
+
   return (
     <div className='flex items-start flex-wrap justify-center gap-6 pb-5'>
-      {products?.length !== 0 && Array.isArray(products)
-        ? products.map((product: Product) => {
+      {filteredProducts?.length !== 0 && Array.isArray(products)
+        ? filteredProducts.map((product: Product) => {
             return (
               <div className='flex flex-col w-fit gap-3 items-start relative group'>
                 <div

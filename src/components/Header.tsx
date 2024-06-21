@@ -91,7 +91,7 @@ const Header = () => {
                   href={`/users/${user?.id}`}
                   className='font-medium text-sm bg-[#DAE1FF] transition-all duration-300 ease-linear hover:bg-[#b7c3f8] text-[#4A6CFA] py-[12px] px-6 rounded-xl'
                 >
-                  შემი განცხადებები
+                  ჩემი განცხადებები
                 </Link>
               </div>
             </SignedIn>

@@ -56,9 +56,7 @@ const initialState: initialStateType = {
 export const fetchProducts = createAsyncThunk('products/fetch', async () => {
   try {
     const { data } = await axios.get('/api/products')
-    return data.products.filter((product: Product) => {
-      return product.availableForPurchase === true
-    })
+    return data.products
   } catch (err) {
     console.log(err)
   }
