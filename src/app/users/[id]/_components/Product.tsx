@@ -5,6 +5,9 @@ import Link from 'next/link'
 import { FaLariSign } from 'react-icons/fa6'
 import { FiDollarSign } from 'react-icons/fi'
 import Heart from './Heart'
+import { VscSparkleFilled } from 'react-icons/vsc'
+import { BiSolidLike } from 'react-icons/bi'
+import { TbReload } from 'react-icons/tb'
 
 const Product = ({
   product,
@@ -13,8 +16,39 @@ const Product = ({
   product: ProductType
   productLiked: boolean
 }) => {
+  const ReturnConditionComponent = () => {
+    if (product?.condition === 'მეორადი') {
+      return (
+        <div className='absolute z-[99] px-2 top-5 bg-[#4A6CFA] text-white rounded-[8px]  font-semibold text-[12px] left-6 flex items-center gap-2 py-1'>
+          <TbReload className='text-[14px]' />
+          <span>{product?.condition}</span>
+        </div>
+      )
+    } else if (product?.condition === 'ახალი') {
+      return (
+        <div className='absolute top-5 z-[99] bg-[#0EC604] px-2 text-white rounded-[8px] font-semibold text-[12px] left-6 flex items-center gap-2 py-1'>
+          <VscSparkleFilled className='text-[14px]' />
+          <span>{product?.condition}</span>
+        </div>
+      )
+    } else if (product?.condition === 'ახალივით') {
+      return (
+        <div className='absolute top-5 z-[99] px-2 bg-[#4A6CFA] text-white rounded-[8px] font-semibold text-[12px] left-6 flex items-center gap-2 py-1'>
+          <BiSolidLike className='text-[14px]' />
+          <span>{product?.condition}</span>
+        </div>
+      )
+    } else {
+      return (
+        <div className='absolute top-5 z-[99] bg-[#4A6CFA] text-white rounded-[8px] font-semibold text-[12px] left-6 flex px-2 items-center gap-2 py-1'>
+          <span>{product?.condition}</span>
+        </div>
+      )
+    }
+  }
   return (
-    <div className='bg-white p-3 rounded-lg flex hover:shadow-none transition-all duration-300 ease-linear flex-col gap-3 w-[320px] drop-shadow-md shadow-md'>
+    <div className='bg-white p-3 rounded-lg relative flex hover:shadow-none transition-all duration-300 ease-linear flex-col gap-3 w-[320px] drop-shadow-md shadow-md'>
+      <ReturnConditionComponent />
       <Link
         href={`/products/${product?.id}`}
         className='relative w-full h-[200px] rounded-lg overflow-hidden'
