@@ -1,6 +1,6 @@
 'use client'
 
-import { Product } from '@prisma/client'
+import { Product, User } from '@prisma/client'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import ProductSlider from './_components/ProductSlider'
@@ -27,6 +27,10 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
     setProductById(getProduct)
   }, [products])
 
+  const productsLength = products.filter((product: Product) => {
+    return product.userId === productById?.userId
+  })
+
   return (
     <>
       <Header />
@@ -48,6 +52,9 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
           />
           <div className='flex items-center gap-5 relative'>
             <ProductInfo
+              length={productsLength?.length as number}
+              userId={productById?.userId as string}
+              products={products}
               productDescription={productById?.description as string}
               productTitle={productById?.name as string}
               id={productById?.id as string}

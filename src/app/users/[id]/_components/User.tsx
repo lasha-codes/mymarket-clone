@@ -3,16 +3,16 @@ import { User } from '@prisma/client'
 import { useSelector } from 'react-redux'
 import Image from 'next/image'
 
-const UserProfile = () => {
-  const { dbUsers, user }: { dbUsers: User[] | null; user: User | null } =
+const UserProfile = ({ userId }: { userId: string }) => {
+  const { dbUsers }: { dbUsers: User[] | null; user: User | null } =
     useSelector((state: any) => state.user)
 
   const userInfo: any =
     dbUsers &&
     dbUsers.find((account: User) => {
-      return account.id === user?.id
+      return account.id === userId
     })
-  if (!user) {
+  if (!userId) {
     return (
       <div className=''>
         <h3>No account found</h3>

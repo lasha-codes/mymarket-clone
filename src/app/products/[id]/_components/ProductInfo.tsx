@@ -3,6 +3,8 @@ import { LuClock4 } from 'react-icons/lu'
 import { format } from 'date-fns'
 import { FaUserLarge, FaPhone } from 'react-icons/fa6'
 import { MdOutlineMail } from 'react-icons/md'
+import { Product } from '@prisma/client'
+import Link from 'next/link'
 
 type ProductInfoProps = {
   id: string
@@ -14,6 +16,9 @@ type ProductInfoProps = {
   sellerLocation: string
   productDescription: string
   productPrice: number
+  userId: string
+  products: Product[]
+  length: number
 }
 
 const ProductInfo = ({
@@ -25,7 +30,10 @@ const ProductInfo = ({
   sellerName,
   sellerLocation,
   productDescription,
+  userId,
+  products,
   productPrice,
+  length,
 }: ProductInfoProps) => {
   return (
     <div className='max-w-fit max-[840px]:max-w-screen max-[840px]:min-w-screen flex flex-col gap-5'>
@@ -51,7 +59,11 @@ const ProductInfo = ({
           </div>
           <div className='flex flex-col gap-0.5'>
             <span className='text-[13px]'>{sellerName && sellerName}</span>
-            <span className='text-[13px] text-gray-400'>1 განცხადება</span>
+            <Link href={`/users/${userId}`}>
+              <span className='text-[13px] text-gray-400 hover:underline'>
+                {length} განცხადება
+              </span>
+            </Link>
           </div>
           <span className='text-[13.5px] font-medium'>
             {sellerLocation && sellerLocation}
