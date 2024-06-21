@@ -14,11 +14,14 @@ const UserProducts = ({ userId }: { userId: string }) => {
     })
 
   return (
-    <div className='w-full flex items-center justify-center flex-wrap gap-6'>
-      {userProducts &&
-        userProducts.map((product: ProductType, idx: number) => {
-          return <Product product={product} key={idx} />
-        })}
+    <div className='w-full flex flex-col items-start gap-10'>
+      <h2 className='text-xl font-semibold px-7'>განცხადებები</h2>
+      <div className='w-full flex items-center justify-center flex-wrap gap-6'>
+        {userProducts &&
+          userProducts.map((product: ProductType, idx: number) => {
+            return <Product product={product} key={idx} />
+          })}
+      </div>
     </div>
   )
 }

@@ -7,8 +7,11 @@ const UserProfilePage = ({ params }: { params: { id: string } }) => {
     <>
       <Header />
       <main className='py-5 px-5'>
-        <UserProfile />
-        <UserProducts userId={params.id} />
+        <div className='flex flex-col items-start w-full gap-10 relative'>
+          <UserProfile />
+          <div className='w-screen absolute left-[-20px] h-[1px] bg-gray-300 top-[68px]' />
+          <UserProducts userId={params.id} />
+        </div>
       </main>
     </>
   )
