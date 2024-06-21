@@ -8,6 +8,7 @@ type initialType = {
   user_products: Product[]
   userLoading: boolean
   productsLoading: boolean
+  dbUsers: User[]
 }
 
 export const fetchUser = createAsyncThunk('user/fetch', async () => {
@@ -31,11 +32,21 @@ export const fetchUserProducts = createAsyncThunk(
   }
 )
 
+export const fetchUsersFromDB = createAsyncThunk('users/fetch', async () => {
+  try {
+    const response = await axios.get('/api/users')
+    return response.data.users
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 const initialState: initialType = {
   user: null,
   user_products: [],
   userLoading: false,
   productsLoading: false,
+  dbUsers: [],
 }
 
 const userSlice = createSlice({
@@ -65,6 +76,9 @@ const userSlice = createSlice({
       state.user_products = payload
       state.productsLoading = false
       console.log(state.user_products)
+    })
+    builder.addCase(fetchUsersFromDB.fulfilled, (state, { payload }) => {
+      state.dbUsers = payload
     })
   },
 })
