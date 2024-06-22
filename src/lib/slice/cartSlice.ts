@@ -110,10 +110,20 @@ const cart = createSlice({
       }
       localStorage.setItem('wishlist', JSON.stringify(state.wishlist))
     },
-    renderWishlist: (state) => {
-      const fromStorage = JSON.parse(localStorage.getItem('wishlist')!)
-      if (fromStorage) {
-        state.wishlist = fromStorage
+    renderWishlist: (state, { payload }) => {
+      const fromStorage = JSON.parse(localStorage.getItem('wishlist')!) || []
+      const { products }: { products: Product[] } = payload
+      const availableProducts = products.filter((product: Product) => {
+        return product.availableForPurchase
+      })
+
+      const checkedStorage = [...fromStorage].filter((item: Product) => {
+        return item.availableForPurchase
+      })
+
+      if (checkedStorage) {
+        console.log('checked', checkedStorage)
+        state.wishlist = checkedStorage
       }
     },
   },
