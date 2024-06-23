@@ -18,12 +18,15 @@ const cart = createSlice({
   reducers: {
     renderCart: (state) => {
       const localCart = JSON.parse(localStorage.getItem('cart')!)
+      const checkedCart = localCart.filter((product: Product) => {
+        return product.availableForPurchase
+      })
+      localStorage.setItem('cart', JSON.stringify(checkedCart))
       if (!localCart) {
         state.cartItems = []
       } else {
-        state.cartItems = localCart
+        state.cartItems = checkedCart
       }
-      console.log(state.cartItems)
     },
     addToCart: (state, { payload }) => {
       const { product, productId }: { product: Product; productId: string } =
@@ -121,10 +124,20 @@ const cart = createSlice({
         return item.availableForPurchase
       })
 
+      localStorage.setItem('wishlist', JSON.stringify(checkedStorage))
+
       if (checkedStorage) {
         console.log('checked', checkedStorage)
         state.wishlist = checkedStorage
       }
+    },
+    removeFromCart: (state, { payload }) => {
+      const { removeId } = payload
+      const newCartArr = state.cartItems.filter((product: Product) => {
+        return product.id !== removeId
+      })
+      state.cartItems = newCartArr
+      localStorage.setItem('cart', JSON.stringify(state.cartItems))
     },
   },
 })
@@ -138,4 +151,5 @@ export const {
   decrementProduct,
   toggleWishlist,
   renderWishlist,
+  removeFromCart,
 } = cart.actions

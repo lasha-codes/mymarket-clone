@@ -7,15 +7,19 @@ import { FaLariSign } from 'react-icons/fa6'
 import { useDispatch } from 'react-redux'
 import WishHeart from '@/app/wishlist/_components/WishHeart'
 import Link from 'next/link'
+import { IoCloseOutline } from 'react-icons/io5'
+import { removeFromCart } from '@/lib/slice/cartSlice'
 
 const CartProduct = ({
   product,
   count,
   cartType,
+  remove,
 }: {
   product: Product
   count?: number
   cartType: boolean
+  remove?: boolean
 }) => {
   const { name, price, images, bill } = product
   const dispatch = useDispatch()
@@ -54,6 +58,12 @@ const CartProduct = ({
         </Link>
       )}
       {!cartType && <WishHeart product={product} />}
+      {remove && (
+        <IoCloseOutline
+          onClick={() => dispatch(removeFromCart({ removeId: product.id }))}
+          className='absolute top-5 right-5 text-[20px] active:scale-90 text-mainYellow cursor-pointer'
+        />
+      )}
     </div>
   )
 }
