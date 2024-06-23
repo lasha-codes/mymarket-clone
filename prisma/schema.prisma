@@ -37,6 +37,7 @@ model Product {
   inStock              Int        @default(1)
   Orders               Orders[]
   Messages             Messages[]
+  Offers               Offers[]
 }
 
 model Orders {
@@ -70,4 +71,13 @@ model User {
   Products Product[]
   Orders   Orders[]
   Messages Messages[]
+}
+
+model Offers {
+  id        String  @id @default(uuid())
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  sellerId  String
+  senderId  String
+  price     Int
 }
