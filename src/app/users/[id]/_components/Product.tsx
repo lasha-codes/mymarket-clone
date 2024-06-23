@@ -1,9 +1,9 @@
 import { Product as ProductType } from '@prisma/client'
 import Image from 'next/image'
-import { FaUser } from 'react-icons/fa'
+import { FaMinus, FaUser } from 'react-icons/fa'
 import Link from 'next/link'
 import { FaLariSign } from 'react-icons/fa6'
-import { FiDollarSign } from 'react-icons/fi'
+import { FiDollarSign, FiMinus } from 'react-icons/fi'
 import Heart from './Heart'
 import { VscSparkleFilled } from 'react-icons/vsc'
 import { BiSolidLike } from 'react-icons/bi'
@@ -50,7 +50,7 @@ const Product = ({
     <div className='bg-white p-3 rounded-lg relative flex hover:shadow-none transition-all duration-300 ease-linear flex-col gap-3 w-[320px] drop-shadow-md shadow-md'>
       <ReturnConditionComponent />
       <Link
-        href={`/products/${product?.id}`}
+        href={product.availableForPurchase ? `/products/${product?.id}` : ''}
         className='relative w-full h-[200px] rounded-lg overflow-hidden'
       >
         <Image src={product?.images[0]} alt='' fill className='object-cover' />
@@ -76,6 +76,14 @@ const Product = ({
             </div>
             <Heart isLiked={productLiked} product={product} />
           </div>
+          {!product?.availableForPurchase ? (
+            <div className='w-full flex justify-between items-center h-[10px] text-red-600'>
+              <FaMinus className='text-sm' />
+              <span className='text-[13px]'>ეს პროდუქტი არ არის მარაგში</span>
+            </div>
+          ) : (
+            <div className='h-[10px]'></div>
+          )}
         </div>
       </div>
     </div>

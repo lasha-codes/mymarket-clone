@@ -21,6 +21,7 @@ import ProductPurchaseInfo from './ProductPurchaseInfo'
 import ReactPlayer from 'react-player'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -33,9 +34,13 @@ const CheckoutForm = ({
   client_secret: string
   purchaseProduct: Product
 }) => {
+  const router = useRouter()
   const [isClient, setIsClient] = useState<boolean>(false)
   useEffect(() => {
     setIsClient(true)
+    if (!purchaseProduct?.availableForPurchase) {
+      router.replace('/')
+    }
   }, [])
 
   return (

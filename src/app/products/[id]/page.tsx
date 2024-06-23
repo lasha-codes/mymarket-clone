@@ -1,6 +1,6 @@
 'use client'
 
-import { Product, User } from '@prisma/client'
+import { Product } from '@prisma/client'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import ProductSlider from './_components/ProductSlider'
@@ -9,9 +9,11 @@ import Purchase from './_components/Purchase'
 import OfferPrice from './_components/OfferPrice'
 import { toggleOfferPriceOpen } from '@/lib/slice/productSlice'
 import Header from '@/components/Header'
+import { useRouter } from 'next/navigation'
 
 const ProductInspectPage = ({ params }: { params: { id: string } }) => {
   const dispatch = useDispatch()
+  const router = useRouter()
   const { products, offerPriceOpen } = useSelector(
     (state: any) => state.product
   )
@@ -19,12 +21,16 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
   const [productById, setProductById] = useState<Product | null>(null)
 
   useEffect(() => {
-    const getProduct =
+    const getProduct: Product =
       products &&
       products.find((product: Product) => {
         return product.id === params.id
       })
     setProductById(getProduct)
+
+    if (!getProduct?.availableForPurchase) {
+      router.replace('/')
+    }
   }, [products])
 
   const productsLength = products.filter((product: Product) => {
