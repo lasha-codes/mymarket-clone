@@ -10,6 +10,10 @@ import { FaYoutube } from 'react-icons/fa'
 import { FaLariSign } from 'react-icons/fa6'
 import { FiDollarSign } from 'react-icons/fi'
 import { format } from 'date-fns'
+import axios from 'axios'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
+axios.defaults.baseURL = 'http://localhost:3000'
 
 const getUsers = (users: User[], recipientId: string, senderId: string) => {
   const sender = users.find((user) => {
@@ -33,6 +37,7 @@ const Message = ({
   type: 'received' | 'sent'
   received_message?: Messages
 }) => {
+  const router = useRouter()
   const { sender, recipient } = getUsers(
     users,
     sent_message ? sent_message!.recipient : received_message!.recipient,
@@ -60,7 +65,28 @@ const Message = ({
     )
   })
 
-  const AcceptOfferComponent = ({ message }: { message: Messages }) => {
+  const AcceptOfferComponent = ({
+    message,
+    type,
+  }: {
+    message: Messages
+    type?: string
+  }) => {
+    const acceptOffer = async () => {
+      try {
+        if (productById) {
+          const response = await axios.post('/api/offers', {
+            sellerId: productById.userId,
+            price: message?.offerPrice,
+            productId: productById.id,
+          })
+          console.log(response.data)
+        }
+      } catch (err: any) {
+        toast.error(err.message)
+      }
+    }
+    if (type === 'sent') return
     if (!productById?.availableForPurchase) {
       return <p className='text-red-500 text-[15px]'>! გაყიდულია</p>
     }
@@ -73,6 +99,7 @@ const Message = ({
     } else {
       return (
         <button
+          onClick={acceptOffer}
           className='bg-transparent text-white hover:bg-green-700 transition-all duration-200 ease-linear border-white bg-green-600 text-sm px-5 py-2.5 
      rounded-xl'
         >
