@@ -79,8 +79,10 @@ const Message = ({
             sellerId: productById.userId,
             price: message?.offerPrice,
             productId: productById.id,
+            message_id: message.id,
           })
           console.log(response.data)
+          router.refresh()
         }
       } catch (err: any) {
         toast.error(err.message)
@@ -92,7 +94,7 @@ const Message = ({
     }
     if (message.acepted) {
       return (
-        <button className='bg-transparent text-green-600 text-sm border-green-600 px-5 py-2.5 rounded-xl'>
+        <button className='bg-transparent text-green-600 text-sm border mt-2 border-green-600 px-5 py-2.5 rounded-xl'>
           <span>დათანხმებულია</span>
         </button>
       )
@@ -236,7 +238,7 @@ const Message = ({
               {showMessage ? 'hide' : 'show'}
             </button>
           </div>
-          <AcceptOfferComponent message={sent_message} />
+          <AcceptOfferComponent message={sent_message} type='sent' />
         </div>
       )
     }
@@ -347,7 +349,7 @@ const Message = ({
                   </div>
                 )}
                 {productById && (
-                  <div className='w-full flex items-center justify-between'>
+                  <div className='w-full flex flex-col gap-2 items-start justify-between'>
                     <Link
                       href={`/products/${productById?.id}`}
                       className='text-[15px] text-black/90'

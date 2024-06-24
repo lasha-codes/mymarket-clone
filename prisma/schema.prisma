@@ -61,7 +61,7 @@ model Messages {
   optionalProduct Product? @relation(fields: [offerProductId], references: [id])
   createdAt       DateTime @default(now())
   offerProductId  String?
-  acepted         Boolean?
+  acepted         Boolean  @default(false)
 }
 
 model User {
