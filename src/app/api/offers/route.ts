@@ -4,7 +4,7 @@ import { currentUser } from '@clerk/nextjs/server'
 
 export async function POST(request: Request) {
   try {
-    const { senderId, price, productId } = await request.json()
+    const { sellerId, price, productId } = await request.json()
     const loggedUser = await currentUser()
     if (!loggedUser) {
       return NextResponse.json({ message: 'Could not find the user' })
@@ -19,8 +19,8 @@ export async function POST(request: Request) {
     }
     const createdOffer = await prisma.offers.create({
       data: {
-        sellerId: userInDb.id,
-        senderId,
+        sellerId: sellerId,
+        senderId: userInDb.id,
         product: {
           connect: {
             id: productId,

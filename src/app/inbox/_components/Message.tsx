@@ -53,12 +53,34 @@ const Message = ({
 
   const { products } = useSelector((state: any) => state.product)
 
-  const productById = products.find((product: Product) => {
+  const productById: Product = products.find((product: Product) => {
     return (
       product.id === sent_message?.offerProductId ||
       product.id === received_message?.offerProductId
     )
   })
+
+  const AcceptOfferComponent = ({ message }: { message: Messages }) => {
+    if (!productById?.availableForPurchase) {
+      return <p className='text-red-500 text-[15px]'>! გაყიდულია</p>
+    }
+    if (message.acepted) {
+      return (
+        <button className='bg-transparent text-green-600 text-sm border-green-600 px-5 py-2.5 rounded-xl'>
+          <span>დათანხმებულია</span>
+        </button>
+      )
+    } else {
+      return (
+        <button
+          className='bg-transparent text-white hover:bg-green-700 transition-all duration-200 ease-linear border-white bg-green-600 text-sm px-5 py-2.5 
+     rounded-xl'
+        >
+          <span>დათანხმება</span>
+        </button>
+      )
+    }
+  }
 
   const ReturnSentMessageComponent = () => {
     if (sent_message && sent_message.type === 'Purchase') {
@@ -187,6 +209,7 @@ const Message = ({
               {showMessage ? 'hide' : 'show'}
             </button>
           </div>
+          <AcceptOfferComponent message={sent_message} />
         </div>
       )
     }
@@ -332,6 +355,7 @@ const Message = ({
             >
               {showMessage ? 'hide' : 'show'}
             </button>
+            <AcceptOfferComponent message={received_message} />
           </div>
         </div>
       )
