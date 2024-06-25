@@ -408,3 +408,5 @@ const Message = ({
 }
 
 export default Message
+
+console.log('going out for shopping')
