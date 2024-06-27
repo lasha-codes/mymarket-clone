@@ -408,5 +408,3 @@ const Message = ({
 }
 
 export default Message
-
-console.log('idk')
