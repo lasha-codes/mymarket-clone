@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { fetchProducts } from '@/lib/slice/productSlice'
 import { fetchMessages, fetchUsers } from '@/lib/slice/messagesSlice'
 import { renderCart, renderWishlist } from '@/lib/slice/cartSlice'
+import { fetchOffers } from '@/lib/slice/offerSlice'
 import { useSelector } from 'react-redux'
 import {
   fetchUser,
@@ -23,6 +24,7 @@ const ProductsProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch(fetchUser() as any)
     dispatch(fetchUserProducts() as any)
     dispatch(fetchUsersFromDB() as any)
+    dispatch(fetchOffers() as any)
   }, [])
   return <>{children}</>
 }

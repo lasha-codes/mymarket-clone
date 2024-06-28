@@ -94,9 +94,12 @@ const Message = ({
     }
     if (message.acepted) {
       return (
-        <button className='bg-transparent text-green-600 text-sm border mt-2 border-green-600 px-5 py-2.5 rounded-xl'>
+        <Link
+          href={`/products/offers/${productById.id}`}
+          className='bg-transparent text-green-600 text-sm border mt-2 border-green-600 px-5 py-2.5 rounded-xl'
+        >
           <span>დათანხმებულია</span>
-        </button>
+        </Link>
       )
     } else {
       return (
