@@ -17,7 +17,7 @@ type ProductInfoProps = {
   productDescription: string
   productPrice: number
   userId: string
-  products: Product[]
+  products?: Product[]
   length: number
 }
 
