@@ -3,6 +3,7 @@ import { Offers, Product } from '@prisma/client'
 import { useSelector } from 'react-redux'
 import ProductSlider from '../../[id]/_components/ProductSlider'
 import ProductInfo from '../../[id]/_components/ProductInfo'
+import Purchase from '../../[id]/_components/Purchase'
 import Header from '@/components/Header'
 
 const OffersPage = ({ params }: { params: { id: string } }) => {
@@ -54,6 +55,21 @@ const OffersPage = ({ params }: { params: { id: string } }) => {
             updatedAt={offerProduct?.updatedAt as Date}
             views={offerProduct?.views as number}
             length={userProducts?.length as number}
+          />
+          <div className='hidden max-[840px]:block max-[785px]:hidden'>
+            <Purchase
+              product={offerProduct as Product}
+              priceOffers={offerProduct?.priceDealType as string[]}
+              price={offerProduct?.price as number}
+            />
+          </div>
+        </div>
+        <div className='max-[840px]:hidden max-[785px]:block'>
+          <Purchase
+            disableOffer={true}
+            product={offerProduct as Product}
+            priceOffers={offerProduct?.priceDealType as string[]}
+            price={currOffer?.price as number}
           />
         </div>
       </section>

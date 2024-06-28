@@ -14,9 +14,15 @@ type PurchaseProps = {
   priceOffers: string[]
   price: number
   product: Product
+  disableOffer?: boolean
 }
 
-const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
+const Purchase = ({
+  priceOffers,
+  price,
+  product,
+  disableOffer,
+}: PurchaseProps) => {
   const dispatch = useDispatch()
   const AddToCartComponent = () => {
     const { cartItems }: { cartItems: Product[] } = useSelector(
@@ -63,12 +69,14 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
             </span>
             <div className='absolute w-0 h-full opacity-0 bg-[#635BFF] group-hover:w-full transition-all duration-500 ease-out rounded-[10px] group-hover:opacity-100' />
           </div>
-          <button
-            onClick={() => dispatch(toggleOfferPriceOpen({ bool: true }))}
-            className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'
-          >
-            შეთავაზე ფასი
-          </button>
+          {!disableOffer && (
+            <button
+              onClick={() => dispatch(toggleOfferPriceOpen({ bool: true }))}
+              className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'
+            >
+              შეთავაზე ფასი
+            </button>
+          )}
           <AddToCartComponent />
         </div>
       )
@@ -97,12 +105,14 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
             </span>
             <div className='absolute w-0 h-full opacity-0 bg-[#635BFF] group-hover:w-full transition-all duration-500 ease-out rounded-[10px] group-hover:opacity-100' />
           </Link>
-          <button
-            onClick={() => dispatch(toggleOfferPriceOpen({ bool: true }))}
-            className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'
-          >
-            შეთავაზე ფასი
-          </button>
+          {!disableOffer && (
+            <button
+              onClick={() => dispatch(toggleOfferPriceOpen({ bool: true }))}
+              className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'
+            >
+              შეთავაზე ფასი
+            </button>
+          )}
           <AddToCartComponent />
         </div>
       )
@@ -128,12 +138,14 @@ const Purchase = ({ priceOffers, price, product }: PurchaseProps) => {
             </span>
             <div className='absolute w-0 h-full opacity-0 bg-[#635BFF] group-hover:w-full transition-all duration-500 ease-out rounded-[10px] group-hover:opacity-100' />
           </Link>
-          <button
-            onClick={() => dispatch(toggleOfferPriceOpen({ bool: true }))}
-            className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'
-          >
-            შეთავაზე ფასი
-          </button>
+          {!disableOffer && (
+            <button
+              onClick={() => dispatch(toggleOfferPriceOpen({ bool: true }))}
+              className='bg-[#EDF0FE] text-[#4A6CFA] font-semibold py-3 rounded-[10px] hover:bg-[#dae1ff] transition-all duration-200 ease-linear'
+            >
+              შეთავაზე ფასი
+            </button>
+          )}
           <AddToCartComponent />
         </div>
       )
