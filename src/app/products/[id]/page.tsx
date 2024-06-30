@@ -108,4 +108,4 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
 
 export default ProductInspectPage
 
-console.log('idk man cant loose the streak')
+console.log('i just dont have time to study right now man')
