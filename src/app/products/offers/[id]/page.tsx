@@ -30,8 +30,6 @@ const OffersPage = ({ params }: { params: { id: string } }) => {
     return product.userId === offerProduct?.userId
   })
 
-  console.log('product', offerProduct)
-
   return (
     <>
       <Header />
@@ -66,6 +64,7 @@ const OffersPage = ({ params }: { params: { id: string } }) => {
         </div>
         <div className='max-[840px]:hidden max-[785px]:block'>
           <Purchase
+            offerId={offerProduct?.id as string}
             disableOffer={true}
             product={offerProduct as Product}
             priceOffers={offerProduct?.priceDealType as string[]}

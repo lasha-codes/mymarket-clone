@@ -15,6 +15,7 @@ type PurchaseProps = {
   price: number
   product: Product
   disableOffer?: boolean
+  offerId?: string
 }
 
 const Purchase = ({
@@ -22,6 +23,7 @@ const Purchase = ({
   price,
   product,
   disableOffer,
+  offerId,
 }: PurchaseProps) => {
   const dispatch = useDispatch()
   const AddToCartComponent = () => {
@@ -95,7 +97,11 @@ const Purchase = ({
             {price}
           </span>
           <Link
-            href={`/products/${product?.id}/purchase`}
+            href={
+              !offerId
+                ? `/products/${product?.id}/purchase`
+                : `/products/${product.id}/purchase?offer=${offerId}`
+            }
             className='py-1 relative rounded-[10px] overflow-hidden group w-full flex items-center justify-center bg-white shadow-lg active:shadow-none transition-all hover:shadow-xl duration-200 ease-linear gap-2'
           >
             <FaStripe className='text-4xl text-[#635BFF] group-hover:text-white z-[10] transition-all duration-200 ease-linear' />
@@ -128,7 +134,11 @@ const Purchase = ({
             {price}
           </span>
           <Link
-            href={`/products/${product?.id}/purchase`}
+            href={
+              !offerId
+                ? `/products/${product?.id}/purchase`
+                : `/products/${product.id}/purchase?offer=${offerId}`
+            }
             className='py-1 relative rounded-[10px] overflow-hidden group w-full flex items-center justify-center bg-white shadow-lg active:shadow-none transition-all hover:shadow-xl duration-200 ease-linear gap-2'
           >
             <FaStripe className='text-4xl text-[#635BFF] group-hover:text-white z-[10] transition-all duration-200 ease-linear' />

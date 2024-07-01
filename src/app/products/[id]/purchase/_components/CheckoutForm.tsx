@@ -22,6 +22,7 @@ import ReactPlayer from 'react-player'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
+import { useSelector } from 'react-redux'
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -30,12 +31,15 @@ const stripePromise = loadStripe(
 const CheckoutForm = ({
   client_secret,
   purchaseProduct,
+  offer,
 }: {
   client_secret: string
   purchaseProduct: Product
+  offer?: string
 }) => {
   const router = useRouter()
   const [isClient, setIsClient] = useState<boolean>(false)
+
   useEffect(() => {
     setIsClient(true)
     if (!purchaseProduct?.availableForPurchase) {

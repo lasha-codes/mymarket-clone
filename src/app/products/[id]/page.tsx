@@ -107,5 +107,3 @@ const ProductInspectPage = ({ params }: { params: { id: string } }) => {
 }
 
 export default ProductInspectPage
-
-console.log('i just dont have time to study right now man')

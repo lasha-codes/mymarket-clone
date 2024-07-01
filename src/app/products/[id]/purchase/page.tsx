@@ -5,7 +5,13 @@ import { Product } from '@prisma/client'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string)
 
-const StripePurchasePage = async ({ params }: { params: { id: string } }) => {
+const StripePurchasePage = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string }
+  searchParams: { offer: string }
+}) => {
   const productId = params.id
   const purchaseProduct: { product: Product } = await getProductByIdPurchase(
     productId
@@ -25,6 +31,7 @@ const StripePurchasePage = async ({ params }: { params: { id: string } }) => {
     <CheckoutForm
       client_secret={paymentIntent.client_secret as string}
       purchaseProduct={purchaseProduct.product}
+      offer={searchParams.offer as string}
     />
   )
 }
