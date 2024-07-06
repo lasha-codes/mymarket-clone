@@ -192,3 +192,5 @@ function ProductToPurchase({ purchaseProduct }: { purchaseProduct: Product }) {
     </Carousel>
   )
 }
+
+console.log('i created my cv today')
