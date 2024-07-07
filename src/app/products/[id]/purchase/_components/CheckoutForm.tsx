@@ -193,4 +193,4 @@ function ProductToPurchase({ purchaseProduct }: { purchaseProduct: Product }) {
   )
 }
 
-console.log('i created my cv today')
+console.log('i have to go out today aswell')
